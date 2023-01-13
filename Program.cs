@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ZooBitScetch
+namespace ZooBitSketch
 {
     internal class Program
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ZooBitScetch
+namespace ZooBitSketch
 {
     internal class CharactersDeck
     {

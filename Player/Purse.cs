@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ZooBitScetch
+namespace ZooBitSketch
 {
     internal class Purse
     {

@@ -1,4 +1,4 @@
-﻿namespace ZooBitScetch
+﻿namespace ZooBitSketch
 {
     internal class CharacterBox
     {
