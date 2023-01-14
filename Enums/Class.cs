@@ -7,7 +7,6 @@ namespace ZooBitSketch
         Singler,
         Guitar,
         Drums,
-        Pianist,
-        Trumpeter
+        Pianist
     }
 }
