@@ -17,14 +17,24 @@ namespace ZooBitSketch
         }
         public void Info()
         {
+            string answer;
+            do
+            {
+                WriteList();
+                answer = Console.ReadLine();
+                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= _boxes.Length)
+                {
+                    Console.WriteLine(_boxes[selection - 1].Info()+"\nPress any key for continue...");
+                    Console.ReadKey();
+                }
+            } while (answer != "exit");
+        }
+        private void WriteList()
+        {
             Console.Clear();
-            Console.WriteLine($"We have 6 boxes:\n");
-            Console.WriteLine("What box do you interested in?");
-            for(int i = 1; i <= _boxes.Length; i++)
-                Console.WriteLine($"{i} - {_boxes[i-1].Name()}");
-            string answer = Console.ReadLine();
-            if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= _boxes.Length)
-                Console.WriteLine(_boxes[selection-1].Info());
+            Console.WriteLine($"We have 6 boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
+            for (int i = 1; i <= _boxes.Length; i++)
+                Console.WriteLine($"{i} - {_boxes[i - 1].Name()}");
         }
     }
 }
