@@ -361,10 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/Enums/Currency.cs
-/Shops/CharacterBox.cs
-/Shops/CharactersShop.cs
-/.gitignore
-/Program.cs
-/Player.cs
-/.gitignore
