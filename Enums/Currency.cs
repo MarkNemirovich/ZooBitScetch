@@ -7,6 +7,7 @@ namespace ZooBitSketch
     enum Currency
     {
         Money,
-        Diamonds
+        Diamonds,
+        DNA
     }
 }
