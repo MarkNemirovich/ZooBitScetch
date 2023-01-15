@@ -49,12 +49,13 @@ namespace ZooBitSketch
             for (int i = 1; i <= Boxes.Length; i++)
                 Console.WriteLine($"{i} - {Boxes[i - 1].Name()}");
         }
-        public bool Purchase(Player player, out int pay)
+        public bool Purchase(Player player, out (int pay, Currency currency) payment, out int DNA)
         {
             CharactersDeck deck = player.CharactersDeck;
             CharacterBox box = ChooseBox(player);
             Console.Clear();
-            pay = 0;
+            payment = (0,0);
+            DNA = 0;
             try
             {
                 (int Cost, Currency Currency) = box.Cost();
@@ -63,9 +64,9 @@ namespace ZooBitSketch
                     case Currency.Money:
                         if (player.Purse.Money >= Cost)
                         {
-                            if (deck.TryAddCards(OpenBox(box, player.Lvl)))
+                            if (deck.TryAddCards(OpenBox(box, player.Lvl), out DNA))
                             {
-                                pay = Cost;
+                                payment = box.Cost();
                                 return true;
                             }
                         }
@@ -79,9 +80,10 @@ namespace ZooBitSketch
                     case Currency.Diamonds:
                         if (player.Purse.Diamonds >= Cost)
                         {
-                            if (deck.TryAddCards(OpenBox(box, player.Lvl)))
+                            if (deck.TryAddCards(OpenBox(box, player.Lvl), out DNA))
                             {
-                                pay = Cost;
+
+                                payment = box.Cost();
                                 return true;
                             }
                         }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
 
 namespace ZooBitSketch
 {
@@ -11,16 +14,31 @@ namespace ZooBitSketch
         {
             _deck = new List<Character>(size);
             Gallery gallery = new Gallery(Rareness.Ordinary);
-            TryAddCards(gallery.InitialCharacters(_deck.Count));
+            TryAddCards(gallery.InitialCharacters(_deck.Count), out int DNA);
         }
-        public bool TryAddCards(Character[] newCharacters)
+        public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
+            DNA = 0;
             if (_deck.Count + newCharacters.Length < _deck.Capacity)
             {
                 Console.Clear();
-                _deck.AddRange(newCharacters);
                 foreach (Character character in newCharacters)
-                    Console.WriteLine(character.Info());
+                {
+                    if (_deck.Any(deck=>deck.Name == character.Name))
+                    {
+                        Character copy = _deck.First(deck => deck.Name == character.Name);
+                        if (copy.Phase < Phase.Adult)
+                            copy.Evolve();
+                        else
+                            DNA += (int)character.Rareness;
+                    }
+                    else
+                        _deck.Add(character);
+                    (string text, ConsoleColor color) = character.Info();
+                    Console.ForegroundColor = color;
+                    Console.WriteLine(text);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
                 Console.WriteLine("You have got these characters. Congradulations!\nPress any key for continue...");
                 Console.ReadKey();
                 return true;
@@ -38,7 +56,11 @@ namespace ZooBitSketch
                 request = Console.ReadLine();
                 if (Int32.TryParse(request, out int result) && result > 0 && result <= _deck.Count)
                 {
-                    Console.WriteLine(_deck[result-1].Info() + "\nPress any key for continue...");
+                    (string text, ConsoleColor color) = _deck[result - 1].Info();
+                    Console.ForegroundColor = color;
+                    Console.WriteLine(text);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nPress any key for continue...");
                     Console.ReadKey();
                 }
                 else if (request != "exit")

@@ -21,56 +21,56 @@ namespace ZooBitSketch
         };
         private readonly Character[] _rare = new Character[]
         {
-            new Character("Fox", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Singler,Genre.Rep),
-            new Character("Leopard", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Drums,Genre.Rock),
+            new Character("Fox",2* rand.Next(0,100), 2*rand.Next(0,100),2*rand.Next(0,100), 2*rand.Next(0,100), 2*rand.Next(0,100),
+                Phase.Child, Rareness.Rare, Class.Singler,Genre.Rep),
+            new Character("Leopard", 2*rand.Next(0,100), 2*rand.Next(0,100),2*rand.Next(0,100), 2*rand.Next(0,100), 2*rand.Next(0,100),
+                Phase.Child, Rareness.Rare, Class.Drums,Genre.Rock),
 
-            new Character("Scwirrel", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Guitar,Genre.Pop),
+            new Character("Scwirrel", 2*rand.Next(0,100), 2*rand.Next(0,100),2*rand.Next(0,100), 2*rand.Next(0,100), 2*rand.Next(0,100),
+                Phase.Child, Rareness.Rare, Class.Guitar,Genre.Pop),
 
-            new Character("Horse", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Pianist,Genre.Reggae),
+            new Character("Horse", 2*rand.Next(0,100), 2*rand.Next(0,100),2*rand.Next(0,100), 2*rand.Next(0,100), 2*rand.Next(0,100),
+                Phase.Child, Rareness.Rare, Class.Pianist,Genre.Reggae),
         };
         private readonly Character[] _elite = new Character[]
         {
-            new Character("Wolf", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Singler,Genre.Rep),
-            new Character("Puma", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Drums,Genre.Rock),
+            new Character("Wolf", 3*rand.Next(0,100), 3*rand.Next(0,100),3*rand.Next(0,100), 3*rand.Next(0,100), 3*rand.Next(0,100),
+                Phase.Child, Rareness.Elite, Class.Singler,Genre.Rep),
+            new Character("Puma", 3*rand.Next(0,100), 3*rand.Next(0,100),3*rand.Next(0,100), 3*rand.Next(0,100), 3*rand.Next(0,100),
+                Phase.Child, Rareness.Elite, Class.Drums,Genre.Rock),
 
-            new Character("Humster", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Guitar,Genre.Pop),
+            new Character("Humster", 3*rand.Next(0,100), 3*rand.Next(0,100),3*rand.Next(0,100), 3*rand.Next(0,100), 3*rand.Next(0,100),
+                Phase.Child, Rareness.Elite, Class.Guitar,Genre.Pop),
 
-            new Character("Zebra", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-               Phase.Child, Rareness.Ordinary, Class.Pianist,Genre.Reggae),
+            new Character("Zebra", 3*rand.Next(0,100), 3*rand.Next(0,100),3*rand.Next(0,100), 3*rand.Next(0,100), 3*rand.Next(0,100),
+               Phase.Child, Rareness.Elite, Class.Pianist,Genre.Reggae),
         };
         private readonly Character[] _epic = new Character[]
         {
-            new Character("Bear", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Singler,Genre.Rep),
-            new Character("Tiger", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Drums,Genre.Rock),
+            new Character("Bear", 4*rand.Next(0,100), 4*rand.Next(0,100),4*rand.Next(0,100),4*rand.Next(0,100), 4*rand.Next(0,100),
+                Phase.Child, Rareness.Epic, Class.Singler,Genre.Rep),
+            new Character("Tiger", 4*rand.Next(0,100), 4*rand.Next(0,100),4*rand.Next(0,100),4*rand.Next(0,100), 4*rand.Next(0,100),
+                Phase.Child, Rareness.Epic, Class.Drums,Genre.Rock),
 
-            new Character("Marmot", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Guitar,Genre.Pop),
+            new Character("Marmot", 4*rand.Next(0,100), 4*rand.Next(0,100),4*rand.Next(0,100),4*rand.Next(0,100), 4*rand.Next(0,100),
+                Phase.Child, Rareness.Epic, Class.Guitar,Genre.Pop),
 
-            new Character("Deer", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Pianist,Genre.Reggae),
+            new Character("Deer", 4*rand.Next(0,100), 4*rand.Next(0,100),4*rand.Next(0,100),4*rand.Next(0,100), 4*rand.Next(0,100),
+                Phase.Child, Rareness.Epic, Class.Pianist,Genre.Reggae),
         };
         private readonly Character[] _legendary = new Character[]
         {
-            new Character("Monkey", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Singler,Genre.Rep),
+            new Character("Monkey", 5*rand.Next(0,100), 5*rand.Next(0,100),5*rand.Next(0,100),5*rand.Next(0,100), 5*rand.Next(0,100),
+                Phase.Child, Rareness.Legendary, Class.Singler,Genre.Rep),
 
-            new Character("Lion", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Drums,Genre.Rock),
+            new Character("Lion", 5*rand.Next(0,100), 5*rand.Next(0,100),5*rand.Next(0,100),5*rand.Next(0,100), 5*rand.Next(0,100),
+                Phase.Child, Rareness.Legendary, Class.Drums,Genre.Rock),
 
-            new Character("Hedgehog", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Guitar,Genre.Pop),
+            new Character("Hedgehog", 5*rand.Next(0,100), 5*rand.Next(0,100),5*rand.Next(0,100),5*rand.Next(0,100), 5*rand.Next(0,100),
+                Phase.Child, Rareness.Legendary, Class.Guitar,Genre.Pop),
 
-            new Character("Elephant", rand.Next(0,100), rand.Next(0,100),rand.Next(0,100), rand.Next(0,100), rand.Next(0,100),
-                Phase.Child, Rareness.Ordinary, Class.Pianist,Genre.Reggae),
+            new Character("Elephant", 5*rand.Next(0,100), 5*rand.Next(0,100),5*rand.Next(0,100),5*rand.Next(0,100), 5*rand.Next(0,100),
+                Phase.Child, Rareness.Legendary, Class.Pianist,Genre.Reggae),
         };
 
         public readonly Character[] CharactersList;

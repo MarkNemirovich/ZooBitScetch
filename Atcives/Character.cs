@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace ZooBitSketch
 {
@@ -35,11 +36,31 @@ namespace ZooBitSketch
         {
             return (Initiative/2 + Fame + Artistry + Charisma + Virtuosity) * (int)Phase;
         }
-        public string Info()
+        public (string, ConsoleColor) Info()
         {
-            return $"\nName: {Name}\n\tStates:\nPower: {Power}\nInitiative: {Initiative}\nFame: {Fame}\n" +
+            ConsoleColor color = ConsoleColor.White;
+            switch (Rareness)
+            {
+                case Rareness.Ordinary: color = ConsoleColor.White; break;
+                case Rareness.Rare: color = ConsoleColor.Green; break;
+                case Rareness.Elite: color = ConsoleColor.Blue; break;
+                case Rareness.Epic: color = ConsoleColor.Cyan; break;
+                case Rareness.Legendary: color = ConsoleColor.Yellow; break;
+            }
+            string text = $"\nName: {Name}\n\tStates:\nPower: {Power}\nInitiative: {Initiative}\nFame: {Fame}\n" +
                 $"Artistry: {Artistry}\nCharisma: {Charisma}\nVirtuosity: {Virtuosity}\n" +
                 $"\tPerforms:\nPhase: {Phase.ToString()}\nRareness: {Rareness.ToString()}\nClass: {Class.ToString()}\nGenre: {Genre.ToString()}\n";
+            return (text, color);
+        }
+        public void Evolve()
+        {
+            Phase++;
+            Initiative *= 1.1;
+            Fame *= 1.1;
+            Artistry *= 1.1;
+            Charisma *= 1.1;
+            Virtuosity *= 1.1;
+            CalculatePower();
         }
     }
 }

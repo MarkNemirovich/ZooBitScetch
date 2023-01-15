@@ -9,6 +9,7 @@ namespace ZooBitSketch
         static void Main(string[] args)
         {
             string name;
+            Console.ForegroundColor = ConsoleColor.White;
             do
             {
                 Console.Clear();
@@ -40,7 +41,7 @@ namespace ZooBitSketch
                     case "bag": player.Bag.Info(); break;
                     case "charactersDeckInfo": player.CharactersDeck.Info(); break;
                     case "charactersShopInfo": charactersShop.Info(player); break;
-                    case "charactersShopPurchase": charactersShop.Purchase(player, out int pay); player.Purse.Spend(pay); break;
+                    case "charactersShopPurchase": charactersShop.Purchase(player, out (int, Currency) pay, out int DNA); player.Purse.Spend(pay, DNA); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");
