@@ -5,18 +5,18 @@ namespace ZooBitSketch
     internal class Character
     {
         public string Name { get; private set; }
-        public float Power { get; private set; }
-        public float Initiative { get; private set; }
-        public float Fame { get; private set; }
-        public float Artistry { get; private set; }
-        public float Charisma { get; private set; }
-        public float Virtuosity { get; private set; }
+        public double Power { get; private set; }
+        public double Initiative { get; private set; }
+        public double Fame { get; private set; }
+        public double Artistry { get; private set; }
+        public double Charisma { get; private set; }
+        public double Virtuosity { get; private set; }
         public Phase Phase { get; private set; }
         public readonly Rareness Rareness;
         public readonly Class Class;
         public readonly Genre Genre;
 
-        public Character(string name, float initiative, float fame, float artistry, float charisma, float virtuosity, Phase phase, Rareness rareness, Class @class, Genre genre)
+        public Character(string name, double initiative, double fame, double artistry, double charisma, double virtuosity, Phase phase, Rareness rareness, Class @class, Genre genre)
         {
             Name = name;
             Initiative= initiative;
@@ -31,7 +31,7 @@ namespace ZooBitSketch
             Power = CalculatePower();
         }
 
-        private float CalculatePower()
+        private double CalculatePower()
         {
             return (Initiative/2 + Fame + Artistry + Charisma + Virtuosity) * (int)Phase;
         }

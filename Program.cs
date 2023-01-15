@@ -42,7 +42,7 @@ namespace ZooBitSketch
                 if (String.Equals(input, "charactersDeck"))
                     player.CharactersDeck.Info();
                 if (String.Equals(input, "charactersShop"))
-                    charactersShop.Info(player.Lvl);
+                    charactersShop.Info(player);
             } while (input != "exit");
         }
     }

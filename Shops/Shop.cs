@@ -4,7 +4,7 @@ namespace ZooBitSketch
 {
     internal abstract class Shop
     {
-        protected Box[] Boxes;
+        protected readonly Box[] Boxes;
         public string Name { get; private set; }
         protected Shop(string name, Box[] boxes)
         {
