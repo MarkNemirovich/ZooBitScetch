@@ -1,22 +1,19 @@
-﻿namespace ZooBitSketch
+﻿using System;
+
+namespace ZooBitSketch
 {
-    internal class CharacterBox
+    internal class CharacterBox : Box
     {
-        private string _name;
-        private int _cost;
-        private Currency _currency;
-        private BoxSize _size;
-        public CharacterBox(string name, int cost, Currency currency, BoxSize size)
+        private Gallery _gallery;
+        public CharacterBox(string name, int cost, Currency currency, BoxSize size) : base(name, cost, currency, size)
         {
-            _name = name;
-            _cost = cost;
-            _currency = currency;
-            _size = size;
         }
-        public string Name() => $"{_name} for {_currency.ToString().ToLower()}";
-        public string Info()
+        public Character GetCharacter(Box box, int playerLvl)
         {
-            return $"\nName = {_name}\nCost = {_cost} money\nCard will be provided = {(int)_size}\n";
+            Rareness rareness = box.GetRareness(playerLvl);
+            _gallery = new Gallery(rareness);
+            Character character = _gallery.GetCharacter();
+            return character;
         }
     }
 }
