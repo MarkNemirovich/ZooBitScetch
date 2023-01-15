@@ -9,6 +9,7 @@ namespace ZooBitSketch
         static void Main(string[] args)
         {
             string name;
+            Console.ForegroundColor = ConsoleColor.White;
             do
             {
                 Console.Clear();
@@ -31,18 +32,18 @@ namespace ZooBitSketch
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "player\npurse\nbag\ncharactersShop\ncharactersDeck\n");
+                    "player\npurse\nbag\ncharactersDeckInfo\ncharactersShopInfo\ncharactersShopPurchase\n");
                 input = Console.ReadLine();
-                if (String.Equals(input, "player"))
-                    player.Info();
-                if (String.Equals(input, "purse"))
-                    player.Purse.Info();
-                if (String.Equals(input, "bag"))
-                    player.Bag.Info();
-                if (String.Equals(input, "charactersDeck"))
-                    player.CharactersDeck.Info();
-                if (String.Equals(input, "charactersShop"))
-                    charactersShop.Info(player);
+                switch (input)
+                {
+                    case "player": player.Info(); break;
+                    case "purse": player.Purse.Info(); break;
+                    case "bag": player.Bag.Info(); break;
+                    case "charactersDeckInfo": player.CharactersDeck.Info(); break;
+                    case "charactersShopInfo": charactersShop.Info(player); break;
+                    case "charactersShopPurchase": charactersShop.Purchase(player, out (int, Currency) pay, out int DNA); player.Purse.Spend(pay, DNA); break;
+                    default: Console.WriteLine("No such command"); break;
+                }
             } while (input != "exit");
         }
     }
