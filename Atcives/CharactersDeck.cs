@@ -17,9 +17,16 @@ namespace ZooBitSketch
         {
             if (_deck.Count + newCharacters.Length < _deck.Capacity)
             {
+                Console.Clear();
                 _deck.AddRange(newCharacters);
+                foreach (Character character in newCharacters)
+                    Console.WriteLine(character.Info());
+                Console.WriteLine("You have got these characters. Congradulations!\nPress any key for continue...");
+                Console.ReadKey();
                 return true;
             }
+            Console.WriteLine("No character with such number. Check your input\nPress any key for continue...");
+            Console.ReadKey();
             return false;
         }
         public void Info()

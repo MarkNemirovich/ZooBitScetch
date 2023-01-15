@@ -5,6 +5,8 @@ namespace ZooBitSketch
     internal abstract class Shop
     {
         protected readonly Box[] Boxes;
+        public delegate int Purchasing(int cost);
+        protected event Purchasing PurchasePayed;
         public string Name { get; private set; }
         protected Shop(string name, Box[] boxes)
         {

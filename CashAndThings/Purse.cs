@@ -18,5 +18,9 @@ namespace ZooBitSketch
             Console.WriteLine($"Money = {Money}\nDiamonds = {Diamonds}\nDNA = {DNA}\n\nPress any key for continue...");
             Console.ReadKey();
         }
+        public void Spend(int pay)
+        {
+            Money -= pay;
+        }
     }
 }
