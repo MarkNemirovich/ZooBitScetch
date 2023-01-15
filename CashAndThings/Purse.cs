@@ -4,9 +4,9 @@ namespace ZooBitSketch
 {
     internal class Purse
     {
-        public uint Money { get; private set; }
-        public uint Diamonds { get; private set; }
-        public uint DNA { get; private set; }
+        public int Money { get; private set; }
+        public int Diamonds { get; private set; }
+        public int DNA { get; private set; }
         public Purse()
         {
             Money = 1000;

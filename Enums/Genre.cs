@@ -7,6 +7,6 @@ namespace ZooBitSketch
         Rock,
         Rep,
         Pop,
-        Metal
+        Reggae
     }
 }
