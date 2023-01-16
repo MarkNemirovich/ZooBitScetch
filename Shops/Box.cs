@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text;
 
 namespace ZooBitSketch
@@ -52,11 +53,11 @@ namespace ZooBitSketch
         }
         private double[] CalculateRareness(int playerLvl)
         {
-            double common = 100 - playerLvl * ((int)_currency + 1) - 10 * (int)_currency;
+            double common = 200 - playerLvl * ((int)_currency + 1) - 10 * (int)_currency;
             double rare = common / 2 + playerLvl * ((int)_currency + 1) - 20 * (int)_currency;
-            double elite = playerLvl * ((int)_currency + 1) + 20 * (int)_currency;
-            double epic = elite / (100 - playerLvl) + 10 * (int)_currency;
-            double legendary = epic * ((int)_currency + 1) * 2 / 10;
+            double elite = playerLvl * ((int)_currency + 10) + 20 * (int)_currency;
+            double epic = elite / (200 - playerLvl) + 10 * (int)_currency;
+            double legendary = epic * ((int)_currency) / 100;
             double total = common + rare + elite + epic + legendary;
             double[] chances = new double[5];
             chances[0] = Math.Round(100.0 * common / total, 2);

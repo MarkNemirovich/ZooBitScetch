@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace ZooBitSketch
 {
@@ -37,67 +38,65 @@ namespace ZooBitSketch
                     break;
                 }
                 else
+                {
+                    if (answer == "exit")
+                        return null;
                     Console.WriteLine("No such item in the shop\nPress any key for continue...");
-                Console.ReadKey();
+                }
+                    Console.ReadKey();
             }
             return new CharacterBox(Boxes[selection - 1]);
         }
-        private void WriteList()
+        public void Purchase(Player player)
         {
-            Console.Clear();
-            Console.WriteLine($"We have 6 boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
-            for (int i = 1; i <= Boxes.Length; i++)
-                Console.WriteLine($"{i} - {Boxes[i - 1].Name()}");
-        }
-        public bool Purchase(Player player, out (int pay, Currency currency) payment, out int DNA)
-        {
-            CharactersDeck deck = player.CharactersDeck;
-            CharacterBox box = ChooseBox(player);
-            Console.Clear();
-            payment = (0,0);
-            DNA = 0;
             try
             {
-                (int Cost, Currency Currency) = box.Cost();
-                switch (Currency)
+                while (true)
                 {
-                    case Currency.Money:
-                        if (player.Purse.Money >= Cost)
-                        {
-                            if (deck.TryAddCards(OpenBox(box, player.Lvl), out DNA))
+                    CharactersDeck deck = player.CharactersDeck;
+                    CharacterBox box = ChooseBox(player);
+                    Console.Clear();
+                    if (box == null)
+                        return;
+                    (int Cost, Currency Currency) = box.Cost();
+                    switch (Currency)
+                    {
+                        case Currency.Money:
+                            if (player.Purse.Money >= Cost)
                             {
-                                payment = box.Cost();
-                                return true;
+                                if (deck.TryAddCards(OpenBox(box, player.Lvl), out int DNA))
+                                {
+                                    player.Purse.Spend(box.Cost(), DNA);
+                                    continue;
+                                }
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have not enough money\nPress any key for continue...");
-                            Console.ReadKey();
-                            return false;
-                        }
-                        break;
-                    case Currency.Diamonds:
-                        if (player.Purse.Diamonds >= Cost)
-                        {
-                            if (deck.TryAddCards(OpenBox(box, player.Lvl), out DNA))
+                            else
                             {
-
-                                payment = box.Cost();
-                                return true;
+                                Console.WriteLine("You have not enough money\nPress any key for continue...");
+                                Console.ReadKey();
+                                continue;
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have not enough diamonds\nPress any key for continue...");
-                            Console.ReadKey();
-                            return false;
-                        }
-                        break;
+                            break;
+                        case Currency.Diamonds:
+                            if (player.Purse.Diamonds >= Cost)
+                            {
+                                if (deck.TryAddCards(OpenBox(box, player.Lvl), out int DNA))
+                                {
+                                    player.Purse.Spend(box.Cost(), DNA);
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have not enough diamonds\nPress any key for continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            break;
+                    }
                 }
-                return true;
             }
-            catch { return false; }
+            catch { }
         }
         private Character[] OpenBox(CharacterBox box, int playerLvl)
         {

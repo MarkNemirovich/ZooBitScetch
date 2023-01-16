@@ -4,6 +4,7 @@ namespace ZooBitSketch
 {
     enum Genre
     {
+        Universal,
         Rock,
         Rep,
         Pop,

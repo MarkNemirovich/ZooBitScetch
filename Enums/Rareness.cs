@@ -4,10 +4,10 @@ namespace ZooBitSketch
 {
     enum Rareness
     {
-        Ordinary,
-        Rare,
-        Elite,
-        Epic,
-        Legendary
+        Ordinary = 10,
+        Rare = 8,
+        Elite = 6,
+        Epic = 4,
+        Legendary = 2
     }
 }

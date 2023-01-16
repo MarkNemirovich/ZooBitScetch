@@ -4,6 +4,7 @@ namespace ZooBitSketch
 {
     enum Class
     {
+        Universal,
         Singler,
         Guitar,
         Drums,

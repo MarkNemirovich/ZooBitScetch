@@ -13,12 +13,12 @@ namespace ZooBitSketch
             Name = name;
             Boxes = boxes;
         }
-        private void WriteList()
+        protected void WriteList()
         {
             Console.Clear();
             Console.WriteLine($"We have 6 boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
             for (int i = 1; i <= Boxes.Length; i++)
-                Console.WriteLine($"{i} - {Boxes[i - 1].Name()}");
+                Console.WriteLine($"{i} - {Boxes[i - 1].Cost().Item2} {Boxes[i - 1].Name().ToLower()} ");
         }
     }
 }
