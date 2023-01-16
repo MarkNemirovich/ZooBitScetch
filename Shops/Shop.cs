@@ -11,7 +11,7 @@ namespace ZooBitSketch
             Name = name;
             Boxes = boxes;
         }
-        protected void WriteList()
+        protected void Description()
         {
             Console.Clear();
             Console.WriteLine($"We have {Boxes.Length} boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");

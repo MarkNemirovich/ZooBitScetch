@@ -13,7 +13,7 @@ namespace ZooBitSketch
             string answer;
             do
             {
-                WriteList();
+                Description();
                 answer = Console.ReadLine();
                 if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= Boxes.Length)
                 {
@@ -30,7 +30,7 @@ namespace ZooBitSketch
             int selection;
             while (true)
             {
-                WriteList();
+                Description();
                 answer = Console.ReadLine();
                 if (Int32.TryParse(answer, out selection) && selection > 0 && selection <= Boxes.Length)
                 {
