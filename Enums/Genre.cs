@@ -6,7 +6,7 @@ namespace ZooBitSketch
     {
         Universal,
         Rock,
-        Rep,
+        Rap,
         Pop,
         Reggae
     }

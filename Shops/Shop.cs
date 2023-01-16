@@ -5,8 +5,6 @@ namespace ZooBitSketch
     internal abstract class Shop
     {
         protected readonly Box[] Boxes;
-        public delegate int Purchasing(int cost);
-        protected event Purchasing PurchasePayed;
         public string Name { get; private set; }
         protected Shop(string name, Box[] boxes)
         {
@@ -16,7 +14,7 @@ namespace ZooBitSketch
         protected void WriteList()
         {
             Console.Clear();
-            Console.WriteLine($"We have 6 boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
+            Console.WriteLine($"We have {Boxes.Length} boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
             for (int i = 1; i <= Boxes.Length; i++)
                 Console.WriteLine($"{i} - {Boxes[i - 1].Cost().Item2} {Boxes[i - 1].Name().ToLower()} ");
         }

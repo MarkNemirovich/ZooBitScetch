@@ -6,7 +6,7 @@ namespace ZooBitSketch
 {
     internal class Character : Active
     {
-        public Character(string name, Phase phase, Rareness rareness, Class @class, Genre genre, States states) 
+        public Character(string name, Phase phase, Rareness rareness, Role @class, Genre genre, States states) 
             : base(name, phase, rareness, @class, genre, states)
         {
         }

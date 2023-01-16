@@ -13,9 +13,9 @@ namespace ZooBitSketch
         public States States { get; private set; }
         public Phase Phase { get; private set; }
         public readonly Rareness Rareness;
-        public readonly Class Class;
+        public readonly Role Class;
         public readonly Genre Genre;
-        protected Active(string name, Phase phase, Rareness rareness, Class @class, Genre genre, States states) 
+        protected Active(string name, Phase phase, Rareness rareness, Role @class, Genre genre, States states) 
         {
             Name = name;
             Phase = phase;

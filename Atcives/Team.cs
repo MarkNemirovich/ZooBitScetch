@@ -5,28 +5,28 @@ using System.Linq;
 
 namespace ZooBitSketch
 {
-    internal class CharactersDeck
+    internal class Team
     {
         public string Name;
-        public List<(Character card, int copies)> _deck { get; private set; }
-        public CharactersDeck(int size)
+        public List<(Character card, int copies)> _team { get; private set; }
+        public Team(int size)
         {
-            _deck = new List<(Character, int)>(size);
+            _team = new List<(Character, int)>(size);
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            TryAddCards(gallery.InitialCharacters(_deck.Count), out int DNA);
+            TryAddCards(gallery.InitialCharacters(_team.Count), out int DNA);
         }
         public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
             DNA = 0;
-            if (_deck.Count + newCharacters.Length < _deck.Capacity)
+            if (_team.Count + newCharacters.Length < _team.Capacity)
             {
                 Console.Clear();
                 foreach (Character character in newCharacters)
                 {
-                    if (_deck.Any(deck=>deck.card.Name == character.Name))
+                    if (_team.Any(deck=>deck.card.Name == character.Name))
                     {
-                        var copy = _deck.First(deck => deck.card.Name == character.Name);
-                        int index = _deck.IndexOf(copy);
+                        var copy = _team.First(deck => deck.card.Name == character.Name);
+                        int index = _team.IndexOf(copy);
                         if (copy.card.Phase < Phase.Adult)
                         {
                             copy.copies++;
@@ -35,13 +35,13 @@ namespace ZooBitSketch
                                 copy.card.Evolve();
                                 copy.copies = 0;
                             }
-                            _deck[index] = copy;
+                            _team[index] = copy;
                         }
                         else
                             DNA += (int)character.Rareness;
                     }
                     else
-                        _deck.Add((character, 0));
+                        _team.Add((character, 0));
                     Console.WriteLine(character.Info(), Console.ForegroundColor = character.ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                 }
@@ -55,7 +55,7 @@ namespace ZooBitSketch
         }
         public void Info()
         {
-            _deck.Sort(delegate ((Character card, int copies) x, (Character card, int copies) y)
+            _team.Sort(delegate ((Character card, int copies) x, (Character card, int copies) y)
             {
                 return x.card.CompareTo(y.card);
             });
@@ -64,11 +64,11 @@ namespace ZooBitSketch
             {
                 WriteList();
                 request = Console.ReadLine();
-                if (Int32.TryParse(request, out int result) && result > 0 && result <= _deck.Count)
+                if (Int32.TryParse(request, out int result) && result > 0 && result <= _team.Count)
                 {
-                    string text = _deck[result - 1].card.Info();
-                    text += $"\nCopies for evolution: {_deck[result - 1].copies}/{(int)_deck[result - 1].card.Rareness}";
-                    Console.WriteLine(text, Console.ForegroundColor = _deck[result - 1].card.ChooseColor());
+                    string text = _team[result - 1].card.Info();
+                    text += $"\nCopies for evolution: {_team[result - 1].copies}/{(int)_team[result - 1].card.Rareness}";
+                    Console.WriteLine(text, Console.ForegroundColor = _team[result - 1].card.ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nPress any key for continue...");
                     Console.ReadKey();
@@ -83,11 +83,11 @@ namespace ZooBitSketch
         private void WriteList()
         {
             Console.Clear();
-            Console.WriteLine($"Amount of characters you have is {_deck.Count}\nMaximum amoun is {_deck.Capacity}.\n" +
+            Console.WriteLine($"Amount of characters you have is {_team.Count}\nMaximum amoun is {_team.Capacity}.\n" +
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
-            for (int i = 0; i < _deck.Count; i++)
+            for (int i = 0; i < _team.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {_deck[i].card.Name} {_deck[i].card.Rareness} {_deck[i].card.Phase}", Console.ForegroundColor = _deck[i].card.ChooseColor());
+                Console.WriteLine($"{i + 1} - {_team[i].card.Name} {_team[i].card.Rareness} {_team[i].card.Phase}", Console.ForegroundColor = _team[i].card.ChooseColor());
             }
         }
     }

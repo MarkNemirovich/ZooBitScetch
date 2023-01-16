@@ -2,7 +2,7 @@
 
 namespace ZooBitSketch
 {
-    enum Class
+    enum Role
     {
         Universal,
         Singler,

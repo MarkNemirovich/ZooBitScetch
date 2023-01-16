@@ -7,19 +7,19 @@ namespace ZooBitSketch
         public readonly string Name;
         public int Lvl { get; private set; }
         public int Exp { get; private set; }
-        private int _maxCharactersDeckSize;
         public Purse Purse { get; private set; }
         public Bag Bag { get; private set; }
-        public CharactersDeck CharactersDeck { get; private set; }
+        public Team Team { get; private set; }
+        private int _maxTeamSize;
         public Player(string name)
         {
             Name = name;
             Lvl = 1;
             Exp = 0;
-            _maxCharactersDeckSize = 20;
+            _maxTeamSize = 20;
             Purse = new Purse();
             Bag= new Bag();
-            CharactersDeck = new CharactersDeck(_maxCharactersDeckSize);
+            Team = new Team(_maxTeamSize);
         }
         public void AddExp(int exp)
         {
@@ -32,7 +32,7 @@ namespace ZooBitSketch
             Exp-= Lvl*100;
             Lvl++;
             if(Lvl%5 == 0)
-                _maxCharactersDeckSize++;
+                _maxTeamSize++;
         }
         public void Info()
         {

@@ -9,7 +9,6 @@ namespace ZooBitSketch
         static void Main(string[] args)
         {
             string name;
-            Console.ForegroundColor = ConsoleColor.White;
             do
             {
                 Console.Clear();
@@ -26,22 +25,22 @@ namespace ZooBitSketch
             boxes[3] = new CharacterBox("Small box", 10, Currency.Diamonds, BoxSize.Small);
             boxes[4] = new CharacterBox("Middle box", 20, Currency.Diamonds, BoxSize.Middle);
             boxes[5] = new CharacterBox("Large box", 45, Currency.Diamonds, BoxSize.Large);
-            CharactersShop charactersShop = new CharactersShop("Characters Shop", boxes);
+            CharactersShop Shop = new CharactersShop("Characters Shop", boxes);
             string input;
             do
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "player\npurse\nbag\ncharactersDeckInfo\ncharactersShopInfo\ncharactersShopPurchase\n");
+                    "Player\nPurse\nBag\nTeamInfo\nShopInfo\nPurchase\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
-                    case "player": player.Info(); break;
-                    case "purse": player.Purse.Info(); break;
-                    case "bag": player.Bag.Info(); break;
-                    case "charactersDeckInfo": player.CharactersDeck.Info(); break;
-                    case "charactersShopInfo": charactersShop.Info(player); break;
-                    case "charactersShopPurchase": charactersShop.Purchase(player); break;
+                    case "Player": player.Info(); break;
+                    case "Purse": player.Purse.Info(); break;
+                    case "Bag": player.Bag.Info(); break;
+                    case "TeamInfo": player.Team.Info(); break;
+                    case "ShopInfo": Shop.Info(player); break;
+                    case "Purchase": Shop.Purchase(player); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");
