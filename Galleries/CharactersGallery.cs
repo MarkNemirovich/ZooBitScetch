@@ -2,7 +2,7 @@
 
 namespace ZooBitSketch
 { 
-    internal class Gallery
+    internal class CharactersGallery
     {
         private static Random rand = new Random();
         private static States RandomStates(Rareness rareness)
@@ -46,7 +46,7 @@ namespace ZooBitSketch
         };
 
         public readonly Character[] CharactersList;
-        public Gallery(Rareness rareness)
+        public CharactersGallery(Rareness rareness)
         {
             switch (rareness)
             {

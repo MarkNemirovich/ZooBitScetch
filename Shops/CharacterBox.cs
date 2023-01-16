@@ -4,7 +4,7 @@ namespace ZooBitSketch
 {
     internal class CharacterBox : Box
     {
-        private Gallery _gallery;
+        private CharactersGallery _gallery;
         public CharacterBox(Box baseBox) : base(baseBox.Name(), baseBox.Cost().Item1, baseBox.Cost().Item2, baseBox.Size())
         {
 
@@ -15,7 +15,7 @@ namespace ZooBitSketch
         public Character GetCharacter(Box box, int playerLvl)
         {
             Rareness rareness = box.GetRareness(playerLvl);
-            _gallery = new Gallery(rareness);
+            _gallery = new CharactersGallery(rareness);
             Character character = _gallery.GetCharacter();
             return character;
         }
