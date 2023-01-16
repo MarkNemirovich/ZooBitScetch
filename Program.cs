@@ -18,14 +18,7 @@ namespace ZooBitSketch
             
             Player player = new Player(name);
 
-            CharacterBox[] boxes = new CharacterBox[6];
-            boxes[0] = new CharacterBox("Small box", 100, Currency.Money, BoxSize.Small);
-            boxes[1] = new CharacterBox("Middle box", 250, Currency.Money, BoxSize.Middle);
-            boxes[2] = new CharacterBox("Large box", 450, Currency.Money, BoxSize.Large);
-            boxes[3] = new CharacterBox("Small box", 10, Currency.Diamonds, BoxSize.Small);
-            boxes[4] = new CharacterBox("Middle box", 20, Currency.Diamonds, BoxSize.Middle);
-            boxes[5] = new CharacterBox("Large box", 45, Currency.Diamonds, BoxSize.Large);
-            CharactersShop Shop = new CharactersShop("Characters Shop", boxes);
+            CharactersShop Shop = new CharactersShop();
             string input;
             do
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
@@ -6,26 +7,41 @@ namespace ZooBitSketch
 {
     internal abstract class Box
     {
-        private string _name;
+        public string Name { get; private set; }
+        public BoxSize Size { get; private set; }
+        protected double[] ActiveChances;
+        private CharactersGallery _characters;
+        private ClothesGallery _clothes;
+        private CardsGallery _cards;
+        private Active[] _allActives;
         private int _cost;
         private Currency _currency;
-        private BoxSize _size;
         private readonly Random rand;
-        public Box(string name, int cost, Currency currency, BoxSize size)
+        public Box(int cost, Currency currency, BoxSize size)
         {
-            _name = name;
             _cost = cost;
             _currency = currency;
-            _size = size;
+            Size = size;
+            Name = $"{size} {currency} box";
             rand = new Random();
         }
-        public string Name() => _name;
         public (int, Currency) Cost() => (_cost, _currency);
-        public BoxSize Size() => _size;
         public string Info(int playerLvl)
         {
-            return $"\nName = {_name}\nCost = {_cost} money\nCards inside = {(int)_size}\n{ChancesDescription(playerLvl)}\n";
+            return $"\nName = {Name}\nCost = {_cost} money\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
         }
+        public void Open()
+        {
+            CalculateChances();
+        }
+        protected void CalculateChances()
+        {
+            List<Active> active = new List<Active>();
+            
+
+        }
+
+
         public string ChancesDescription(int playerLvl)
         {            
             StringBuilder sb = new StringBuilder();
@@ -51,7 +67,7 @@ namespace ZooBitSketch
                 return Rareness.Rare;
             return Rareness.Ordinary;
         }
-        private double[] CalculateRareness(int playerLvl)
+        protected virtual double[] CalculateRareness(int playerLvl)
         {
             double common = 200 - playerLvl * ((int)_currency + 1) - 10 * (int)_currency;
             double rare = common / 2 + playerLvl * ((int)_currency + 1) - 20 * (int)_currency;

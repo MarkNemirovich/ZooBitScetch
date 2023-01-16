@@ -5,9 +5,14 @@ namespace ZooBitSketch
 {
     internal class CharactersShop : Shop
     {
-        public CharactersShop(string name, Box[] boxes) : base(name, boxes)
-        {
-        }
+        public CharactersShop() : base("Characters shop", new Box[]
+        {   new GeneralBox( 10, Currency.Money, BoxSize.Small ),
+            new GeneralBox( 50, Currency.Money, BoxSize.Middle ),
+            new GeneralBox( 100, Currency.Money, BoxSize.Large ),
+            new GeneralBox( 5, Currency.Diamonds, BoxSize.Small ),
+            new GeneralBox( 25, Currency.Diamonds, BoxSize.Middle ),
+            new GeneralBox( 50, Currency.Diamonds, BoxSize.Large )
+        }) { }
         public void Info(Player player)
         {
             string answer;
@@ -100,7 +105,7 @@ namespace ZooBitSketch
         }
         private Character[] OpenBox(CharacterBox box, int playerLvl)
         {
-            Character[] characters = new Character[(int)box.Size()];
+            Character[] characters = new Character[(int)box.Size];
             for (int i = 0; i < characters.Length; i++)
                 characters[i] = box.GetCharacter(box, playerLvl);
             return characters;

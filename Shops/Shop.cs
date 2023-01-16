@@ -16,7 +16,7 @@ namespace ZooBitSketch
             Console.Clear();
             Console.WriteLine($"We have {Boxes.Length} boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
             for (int i = 1; i <= Boxes.Length; i++)
-                Console.WriteLine($"{i} - {Boxes[i - 1].Cost().Item2} {Boxes[i - 1].Name().ToLower()} ");
+                Console.WriteLine($"{i} - {Boxes[i - 1].Cost().Item2} {Boxes[i - 1].Name.ToLower()} ");
         }
     }
 }

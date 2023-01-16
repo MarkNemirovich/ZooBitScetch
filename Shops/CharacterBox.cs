@@ -5,11 +5,11 @@ namespace ZooBitSketch
     internal class CharacterBox : Box
     {
         private CharactersGallery _gallery;
-        public CharacterBox(Box baseBox) : base(baseBox.Name(), baseBox.Cost().Item1, baseBox.Cost().Item2, baseBox.Size())
+        public CharacterBox(Box baseBox) : base(baseBox.Cost().Item1, baseBox.Cost().Item2, baseBox.Size)
         {
 
         }
-        public CharacterBox(string name, int cost, Currency currency, BoxSize size) : base(name, cost, currency, size)
+        public CharacterBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size)
         {
         }
         public Character GetCharacter(Box box, int playerLvl)
