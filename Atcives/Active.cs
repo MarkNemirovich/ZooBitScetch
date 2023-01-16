@@ -13,14 +13,14 @@ namespace ZooBitSketch
         public States States { get; private set; }
         public Phase Phase { get; private set; }
         public readonly Rareness Rareness;
-        public readonly Role Class;
+        public readonly Role Role;
         public readonly Genre Genre;
-        protected Active(string name, Phase phase, Rareness rareness, Role @class, Genre genre, States states) 
+        protected Active(string name, Phase phase, Rareness rareness, Role role, Genre genre, States states) 
         {
             Name = name;
             Phase = phase;
             Rareness = rareness;
-            Class = @class;
+            Role = role;
             Genre = genre;
             States = states;
         }
@@ -51,7 +51,7 @@ namespace ZooBitSketch
         public string Info()
         {
             string text =$"\nName: {Name}\n" +
-                $"Rareness: {Rareness.ToString(),-10}Phase: {Phase.ToString(),-10}Class: {Class.ToString(),-10}Genre: {Genre.ToString()}\n" +
+                $"Rareness: {Rareness.ToString(),-10}Phase: {Phase.ToString(),-10}Class: {Role.ToString(),-10}Genre: {Genre.ToString()}\n" +
                 $"{States.Info()}";
             return (text);
         }

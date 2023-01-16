@@ -10,9 +10,6 @@ namespace ZooBitSketch
         public string Name { get; private set; }
         public BoxSize Size { get; private set; }
         protected double[] ActiveChances;
-        private CharactersGallery _characters;
-        private ClothesGallery _clothes;
-        private CardsGallery _cards;
         private Active[] _allActives;
         private int _cost;
         private Currency _currency;
@@ -32,16 +29,85 @@ namespace ZooBitSketch
         }
         public void Open()
         {
-            CalculateChances();
+            // CalculateAllChances();
+            SmartChancesCalculation();
         }
-        protected void CalculateChances()
+        protected void SmartChancesCalculation()
         {
-            List<Active> active = new List<Active>();
-            
-
+            List<Active> content = new List<Active>();
+            for (int i = 0; i < (int)Size; i++)
+            {
+                Rareness rareness;
+                int dice = rand.Next(0, 100);
+                if (dice < 39)
+                    rareness = Rareness.Ordinary;
+                else if (dice < 69)
+                    rareness = Rareness.Rare;
+                else if (dice < 89)
+                    rareness = Rareness.Elite;
+                else if (dice < 99)
+                    rareness = Rareness.Epic;
+                else
+                    rareness = Rareness.Legendary;
+                dice = rand.Next(0, 3);
+                switch (dice)
+                {
+                    case 0:
+                        {
+                            CardsGallery array = new CardsGallery(rareness);
+                            dice = rand.Next(0, array.CurrentList.Length);
+                            content.Add((Active)array.CurrentList[dice]);
+                            break;
+                        }
+                    case 1:
+                        {
+                            ClothesGallery array = new ClothesGallery(rareness);
+                            dice = rand.Next(0, array.CurrentList.Length);
+                            content.Add((Active)array.CurrentList[dice]);
+                            break;
+                        }
+                    case 2:
+                        {
+                            CharactersGallery array = new CharactersGallery(rareness);
+                            dice = rand.Next(0, array.CurrentList.Length);
+                            content.Add((Active)array.CurrentList[dice]);
+                            break;
+                        }
+                }
+                Console.WriteLine($"{i + 1} - {content[i].Name} {content[i].Rareness} {content[i].Genre} {content[i].Role}");
+            }
         }
-
-
+        protected void CalculateAllChances() // all things chances' calculation
+        {
+            List<Active> allActives = new List<Active>();
+            double total = 0;
+            foreach (Rareness rareness in Enum.GetValues(typeof(Rareness)))
+            {
+                CharactersGallery _characters = new CharactersGallery(rareness);
+                ClothesGallery _clothes = new ClothesGallery(rareness);
+                CardsGallery _cards = new CardsGallery(rareness);
+                var ch = _characters.FullCardList();
+                total += ch.Count * Math.Pow((int)rareness, 5);
+                var cl = _clothes.FullCardList();
+                total += ch.Count * Math.Pow((int)rareness, 5);
+                var ca = _cards.FullCardList();
+                total += ch.Count * Math.Pow((int)rareness, 5);
+                allActives.AddRange(ch);
+                allActives.AddRange(cl);
+                allActives.AddRange(ca);
+            }
+            List<(Active active, double chance)> probability = new List<(Active, double)>();
+            double sum = 0;
+            for (int i = 0; i < allActives.Count; i++)
+            {
+                var amount = Math.Pow((double)allActives[i].Rareness, 5) / total * 100;
+                probability.Add((allActives[i], Math.Round(amount,3)));
+                sum += Math.Round(amount, 3);
+                Console.WriteLine($"{i+1} - {probability[i].active.Name} with {probability[i].chance}% chance");
+            }
+            Console.WriteLine("total " + total);
+            Console.WriteLine("sum " + sum);
+        }
         public string ChancesDescription(int playerLvl)
         {            
             StringBuilder sb = new StringBuilder();

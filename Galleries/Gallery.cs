@@ -39,7 +39,7 @@ namespace ZooBitSketch
             int number = rand.Next(0, CurrentList.Length);
             return CurrentList[number];
         }
-        public T[] InitialClothes(int size)
+        public T[] StartedPack(int size)
         {
             if (size == 0)
                 return _ordinary;

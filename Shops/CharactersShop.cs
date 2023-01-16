@@ -9,9 +9,9 @@ namespace ZooBitSketch
         {   new GeneralBox( 10, Currency.Money, BoxSize.Small ),
             new GeneralBox( 50, Currency.Money, BoxSize.Middle ),
             new GeneralBox( 100, Currency.Money, BoxSize.Large ),
-            new GeneralBox( 5, Currency.Diamonds, BoxSize.Small ),
-            new GeneralBox( 25, Currency.Diamonds, BoxSize.Middle ),
-            new GeneralBox( 50, Currency.Diamonds, BoxSize.Large )
+            new GeneralBox( 10, Currency.Diamonds, BoxSize.Small ),
+            new GeneralBox( 50, Currency.Diamonds, BoxSize.Middle ),
+            new GeneralBox( 100, Currency.Diamonds, BoxSize.Large )
         }) { }
         public void Info(Player player)
         {
@@ -39,6 +39,7 @@ namespace ZooBitSketch
                 answer = Console.ReadLine();
                 if (Int32.TryParse(answer, out selection) && selection > 0 && selection <= Boxes.Length)
                 {
+                    Boxes[selection - 1].Open();
                     Console.WriteLine(Boxes[selection - 1].Info(player.Lvl) + "\nPress any key for continue...");
                     break;
                 }

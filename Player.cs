@@ -16,7 +16,7 @@ namespace ZooBitSketch
             Name = name;
             Lvl = 1;
             Exp = 0;
-            _maxTeamSize = 20;
+            _maxTeamSize = 1000;
             Purse = new Purse();
             Bag= new Bag();
             Team = new Team(_maxTeamSize);

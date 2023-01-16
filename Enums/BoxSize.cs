@@ -6,6 +6,6 @@ namespace ZooBitSketch
     {
         Small = 1,
         Middle = 5,
-        Large = 10
+        Large = 100
     }
 }

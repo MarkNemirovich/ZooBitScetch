@@ -13,7 +13,7 @@ namespace ZooBitSketch
         {
             _team = new List<(Character, int)>(size);
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            TryAddCards(gallery.InitialCharacters(_team.Count), out int DNA);
+            TryAddCards(gallery.StartedPack(_team.Count), out int DNA);
         }
         public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
