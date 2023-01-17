@@ -61,6 +61,10 @@ namespace ZooBitSketch
                 {
                     Team<Character> deck = player.Team;
                     CharacterBox box = ChooseBox(player);
+                    if (box != null)
+                        box.Open();
+                    else
+                        return;
                     Console.Clear();
                     if (box == null)
                         return;

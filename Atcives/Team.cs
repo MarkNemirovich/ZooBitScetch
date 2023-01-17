@@ -10,27 +10,27 @@ namespace ZooBitSketch
         public Team(int size) : base(size)
         {
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            TryAddCards(gallery.StartedPack(Team.Count), out int DNA);
+            TryAddCards(gallery.StartedPack(Pack.Count), out int DNA);
         }
         public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
             DNA = 0;
-            if (Team.Count + newCharacters.Length < Team.Capacity)
+            if (Pack.Count + newCharacters.Length < Pack.Capacity)
             {
                 Console.Clear();
                 foreach (Character character in newCharacters)
                 {
-                    if (Team.Any(deck=>deck.Name == character.Name))
+                    if (Pack.Any(deck=>deck.Name == character.Name))
                     {
-                        var copy = Team.First(deck => deck.Name == character.Name);
-                        int index = Team.IndexOf(copy);
+                        var copy = Pack.First(deck => deck.Name == character.Name);
+                        int index = Pack.IndexOf(copy);
                         if (copy.Phase < Phase.Adult)
-                            Team[index].AddCopy();
+                            Pack[index].AddCopy();
                         else
                             DNA += (int)character.Rareness;
                     }
                     else
-                        Team.Add(character);
+                        Pack.Add(character);
                     Console.WriteLine(character.Info(), Console.ForegroundColor = character.ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                 }
@@ -44,7 +44,7 @@ namespace ZooBitSketch
         }
         sealed public override void Info()
         {
-            Team.Sort(delegate (Character x, Character y)
+            Pack.Sort(delegate (Character x, Character y)
             {
                 return x.CompareTo(y);
             });
@@ -53,11 +53,11 @@ namespace ZooBitSketch
             {
                 WriteList();
                 request = Console.ReadLine();
-                if (Int32.TryParse(request, out int result) && result > 0 && result <= Team.Count)
+                if (Int32.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
                 {
-                    string text = Team[result - 1].Info();
-                    text += $"\nCopies for evolution: {Team[result - 1].Copies}/{(int)Team[result - 1].Rareness}";
-                    Console.WriteLine(text, Console.ForegroundColor = Team[result - 1].ChooseColor());
+                    string text = Pack[result - 1].Info();
+                    text += $"\nCopies for evolution: {Pack[result - 1].Copies}/{(int)Pack[result - 1].Rareness}";
+                    Console.WriteLine(text, Console.ForegroundColor = Pack[result - 1].ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nPress any key for continue...");
                     Console.ReadKey();
@@ -72,11 +72,11 @@ namespace ZooBitSketch
         sealed protected override void WriteList()
         {
             base.WriteList();
-            Console.WriteLine($"Amount of characters you have is {Team.Count}\nMaximum amoun is {Team.Capacity}.\n" +
+            Console.WriteLine($"Amount of characters you have is {Pack.Count}\nMaximum amoun is {Pack.Capacity}.\n" +
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
-            for (int i = 0; i < Team.Count; i++)
+            for (int i = 0; i < Pack.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {Team[i].Name} {Team[i].Rareness} {Team[i].Phase}", Console.ForegroundColor = Team[i].ChooseColor());
+                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Phase}", Console.ForegroundColor = Pack[i].ChooseColor());
             }
         }
     }
