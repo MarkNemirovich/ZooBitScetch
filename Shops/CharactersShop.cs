@@ -59,7 +59,7 @@ namespace ZooBitSketch
             {
                 while (true)
                 {
-                    Team deck = player.Team;
+                    Team<Character> deck = player.Team;
                     CharacterBox box = ChooseBox(player);
                     Console.Clear();
                     if (box == null)

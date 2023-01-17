@@ -9,7 +9,9 @@ namespace ZooBitSketch
         public int Exp { get; private set; }
         public Purse Purse { get; private set; }
         public Bag Bag { get; private set; }
-        public Team Team { get; private set; }
+        public Deck<Card> Deck { get; private set; }
+        public Team<Character> Team { get; private set; }
+        public Wardrobe<Clothes> Wardrobe { get; private set; }
         private int _maxTeamSize;
         public Player(string name)
         {
@@ -19,7 +21,9 @@ namespace ZooBitSketch
             _maxTeamSize = 1000;
             Purse = new Purse();
             Bag= new Bag();
-            Team = new Team(_maxTeamSize);
+            Deck = new Deck<Card>(_maxTeamSize);
+            Team = new Team<Character>(_maxTeamSize);
+            Wardrobe = new Wardrobe<Clothes>(_maxTeamSize);
         }
         public void AddExp(int exp)
         {

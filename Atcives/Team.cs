@@ -5,11 +5,10 @@ using System.Linq;
 
 namespace ZooBitSketch
 {
-    internal class Team
+    internal class Team<T> : AbstractPack<Character>
     {
-        public string Name;
         public List<(Character card, int copies)> _team { get; private set; }
-        public Team(int size)
+        public Team(int size) : base()
         {
             _team = new List<(Character, int)>(size);
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
@@ -53,7 +52,7 @@ namespace ZooBitSketch
             Console.ReadKey();
             return false;
         }
-        public void Info()
+        sealed public override void Info()
         {
             _team.Sort(delegate ((Character card, int copies) x, (Character card, int copies) y)
             {
@@ -80,9 +79,9 @@ namespace ZooBitSketch
                 }
             } while (request != "exit");
         }
-        private void WriteList()
+        sealed protected override void WriteList()
         {
-            Console.Clear();
+            base.WriteList();
             Console.WriteLine($"Amount of characters you have is {_team.Count}\nMaximum amoun is {_team.Capacity}.\n" +
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
             for (int i = 0; i < _team.Count; i++)

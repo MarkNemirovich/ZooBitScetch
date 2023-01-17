@@ -8,7 +8,7 @@ namespace ZooBitSketch
         public Card(string name, CardType type, Phase phase, Rareness rareness, Role role, Genre genre, States states)
             : base(name, phase, rareness, role, genre, states)
         {
-            _type= type;
+            _type = type;
         }
     }
 }
