@@ -7,7 +7,7 @@ namespace ZooBitSketch
     internal class Wardrobe<T> : AbstractPack<Clothes>
     {
         public List<Clothes> _clothes { get; private set; }
-        public Wardrobe(int size) : base()
+        public Wardrobe(int size) : base(size)
         {
             _clothes = new List<Clothes>();
         }

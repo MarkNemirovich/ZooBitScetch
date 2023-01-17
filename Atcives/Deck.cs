@@ -5,7 +5,7 @@ namespace ZooBitSketch
 {
     internal class Deck<T> : AbstractPack<Card>
     {
-        public Deck(int size) : base()
+        public Deck(int size) : base(size)
         {
         }
         sealed public override void Info()

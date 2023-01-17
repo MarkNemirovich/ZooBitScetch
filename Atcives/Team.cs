@@ -7,40 +7,30 @@ namespace ZooBitSketch
 {
     internal class Team<T> : AbstractPack<Character>
     {
-        public List<(Character card, int copies)> _team { get; private set; }
-        public Team(int size) : base()
+        public Team(int size) : base(size)
         {
-            _team = new List<(Character, int)>(size);
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            TryAddCards(gallery.StartedPack(_team.Count), out int DNA);
+            TryAddCards(gallery.StartedPack(Team.Count), out int DNA);
         }
         public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
             DNA = 0;
-            if (_team.Count + newCharacters.Length < _team.Capacity)
+            if (Team.Count + newCharacters.Length < Team.Capacity)
             {
                 Console.Clear();
                 foreach (Character character in newCharacters)
                 {
-                    if (_team.Any(deck=>deck.card.Name == character.Name))
+                    if (Team.Any(deck=>deck.Name == character.Name))
                     {
-                        var copy = _team.First(deck => deck.card.Name == character.Name);
-                        int index = _team.IndexOf(copy);
-                        if (copy.card.Phase < Phase.Adult)
-                        {
-                            copy.copies++;
-                            if (copy.copies >= (int)copy.card.Rareness)
-                            {
-                                copy.card.Evolve();
-                                copy.copies = 0;
-                            }
-                            _team[index] = copy;
-                        }
+                        var copy = Team.First(deck => deck.Name == character.Name);
+                        int index = Team.IndexOf(copy);
+                        if (copy.Phase < Phase.Adult)
+                            Team[index].AddCopy();
                         else
                             DNA += (int)character.Rareness;
                     }
                     else
-                        _team.Add((character, 0));
+                        Team.Add(character);
                     Console.WriteLine(character.Info(), Console.ForegroundColor = character.ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                 }
@@ -54,20 +44,20 @@ namespace ZooBitSketch
         }
         sealed public override void Info()
         {
-            _team.Sort(delegate ((Character card, int copies) x, (Character card, int copies) y)
+            Team.Sort(delegate (Character x, Character y)
             {
-                return x.card.CompareTo(y.card);
+                return x.CompareTo(y);
             });
             string request;
             do
             {
                 WriteList();
                 request = Console.ReadLine();
-                if (Int32.TryParse(request, out int result) && result > 0 && result <= _team.Count)
+                if (Int32.TryParse(request, out int result) && result > 0 && result <= Team.Count)
                 {
-                    string text = _team[result - 1].card.Info();
-                    text += $"\nCopies for evolution: {_team[result - 1].copies}/{(int)_team[result - 1].card.Rareness}";
-                    Console.WriteLine(text, Console.ForegroundColor = _team[result - 1].card.ChooseColor());
+                    string text = Team[result - 1].Info();
+                    text += $"\nCopies for evolution: {Team[result - 1].Copies}/{(int)Team[result - 1].Rareness}";
+                    Console.WriteLine(text, Console.ForegroundColor = Team[result - 1].ChooseColor());
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nPress any key for continue...");
                     Console.ReadKey();
@@ -82,11 +72,11 @@ namespace ZooBitSketch
         sealed protected override void WriteList()
         {
             base.WriteList();
-            Console.WriteLine($"Amount of characters you have is {_team.Count}\nMaximum amoun is {_team.Capacity}.\n" +
+            Console.WriteLine($"Amount of characters you have is {Team.Count}\nMaximum amoun is {Team.Capacity}.\n" +
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
-            for (int i = 0; i < _team.Count; i++)
+            for (int i = 0; i < Team.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {_team[i].card.Name} {_team[i].card.Rareness} {_team[i].card.Phase}", Console.ForegroundColor = _team[i].card.ChooseColor());
+                Console.WriteLine($"{i + 1} - {Team[i].Name} {Team[i].Rareness} {Team[i].Phase}", Console.ForegroundColor = Team[i].ChooseColor());
             }
         }
     }

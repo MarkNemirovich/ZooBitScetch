@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace ZooBitSketch
 {
     internal abstract class AbstractPack<T> where T : Active
     {
         public string Name { get; private set; }
-        protected AbstractPack()
+        public List<T> Team { get; private set; }
+        protected AbstractPack(int size)
         {
-            Name = typeof(T).Name;
+            Name = typeof(T).Name; 
+            Team = new List<T>(size);
         }
         public virtual void Info()
         {
@@ -24,6 +28,10 @@ namespace ZooBitSketch
         {
             Console.Clear();
             Console.WriteLine($"Welcome to the {Name} deck.");
+        }
+        protected virtual void Add()
+        {
+            
         }
     }
 }
