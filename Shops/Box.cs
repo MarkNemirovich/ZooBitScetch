@@ -10,7 +10,6 @@ namespace ZooBitSketch
         public string Name { get; private set; }
         public BoxSize Size { get; private set; }
         protected double[] ActiveChances;
-        private Active[] _allActives;
         private int _cost;
         private Currency _currency;
         private readonly Random rand;

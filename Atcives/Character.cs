@@ -8,7 +8,7 @@ namespace ZooBitSketch
     {
         public int Copies => _copies;
         private int _copies;
-        public Character(string name, Phase phase, Rareness rareness, Role role, Genre genre, States states) 
+        public Character(string name, Phase phase, Rareness rareness, Role role, Genre genre, States states)
             : base(name, phase, rareness, role, genre, states)
         {
             _copies = 0;
