@@ -27,6 +27,13 @@ namespace ZooBitSketch
             States = states;
             Guid = GetHashCode();
         }
+        public int GetTypeCode(Type t)
+        {
+            byte typeSum = 0;
+            foreach (char letter in t.Name)
+                typeSum += (byte)letter;
+            return typeSum;
+        }
         public override int GetHashCode()
         {
             byte typeSum = 0;

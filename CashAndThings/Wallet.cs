@@ -2,12 +2,12 @@
 
 namespace ZooBitSketch
 {
-    internal class Purse
+    internal class Wallet
     {
         public int Money { get; private set; }
         public int Diamonds { get; private set; }
         public int DNA { get; private set; }
-        public Purse()
+        public Wallet()
         {
             Money = 10000;
             Diamonds = 10000;
@@ -18,7 +18,7 @@ namespace ZooBitSketch
             Console.WriteLine($"Money = {Money}\nDiamonds = {Diamonds}\nDNA = {DNA}\n\nPress any key for continue...");
             Console.ReadKey();
         }
-        public void Spend((int cost, Currency currency) pay, int cashBack)
+        public void Pay((int cost, Currency currency) pay)
         {
             switch (pay.currency)
             {
@@ -26,7 +26,6 @@ namespace ZooBitSketch
                 case Currency.Diamonds: Diamonds -= pay.cost; break;
                 case Currency.DNA: DNA -= pay.cost; break;
             }
-            DNA += cashBack;
         }
     }
 }

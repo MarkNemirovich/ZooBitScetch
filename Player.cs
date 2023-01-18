@@ -7,7 +7,7 @@ namespace ZooBitSketch
         public readonly string Name;
         public int Lvl { get; private set; }
         public int Exp { get; private set; }
-        public Purse Purse { get; private set; }
+        public Wallet Wallet { get; private set; }
         public Bag Bag { get; private set; }
         public Deck<Card> Deck { get; private set; }
         public Team<Character> Team { get; private set; }
@@ -19,7 +19,7 @@ namespace ZooBitSketch
             Lvl = 1;
             Exp = 0;
             _maxSize = 1000;
-            Purse = new Purse();
+            Wallet = new Wallet();
             Bag= new Bag();
             Deck = new Deck<Card>(_maxSize);
             Team = new Team<Character>(_maxSize);

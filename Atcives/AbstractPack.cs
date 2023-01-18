@@ -30,7 +30,7 @@ namespace ZooBitSketch
             Console.Clear();
             Console.WriteLine($"Welcome to the {Name} deck.");
         }
-        protected virtual void Add(T newItem)
+        public virtual void Add(T newItem)
         {
             Pack.Add(newItem);
         }

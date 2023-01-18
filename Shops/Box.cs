@@ -26,12 +26,12 @@ namespace ZooBitSketch
         {
             return $"\nName = {Name}\nCost = {_cost} money\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
         }
-        public void Open()
+        public Active[] Open()
         {
             // CalculateAllChances();
-            SmartChancesCalculation();
+            return SmartChancesCalculation();
         }
-        protected void SmartChancesCalculation()
+        protected Active[] SmartChancesCalculation()
         {
             List<Active> content = new List<Active>();
             for (int i = 0; i < (int)Size; i++)
@@ -75,6 +75,7 @@ namespace ZooBitSketch
                 }
                 Console.WriteLine($"{i + 1} - {content[i].Name} {content[i].Rareness} {content[i].Genre} {content[i].Role}");
             }
+            return content.ToArray();
         }
         protected void CalculateAllChances() // all things chances' calculation
         {

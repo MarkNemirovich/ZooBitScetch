@@ -18,24 +18,23 @@ namespace ZooBitSketch
             
             Player player = new Player(name);
 
-            CharactersShop Shop = new CharactersShop();
+            GeneralShop Shop = new GeneralShop();
             string input;
             do
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "Player\nPurse\nBag\nDeckInfo\nTeamInfo\nWardrobeInfo\nShopInfo\nPurchase\n");
+                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nShop\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
                     case "Player": player.Info(); break;
-                    case "Purse": player.Purse.Info(); break;
+                    case "Wallet": player.Wallet.Info(); break;
                     case "Bag": player.Bag.Info(); break;
-                    case "DeckInfo": player.Deck.Info(); break;
-                    case "TeamInfo": player.Team.Info(); break;
-                    case "WardrobeInfo": player.Wardrobe.Info(); break;
-                    case "ShopInfo": Shop.Info(player); break;
-                    case "Purchase": Shop.Purchase(player); break;
+                    case "Deck": player.Deck.Info(); break;
+                    case "Team": player.Team.Info(); break;
+                    case "Wardrobe": player.Wardrobe.Info(); break;
+                    case "Shop": Shop.Entry(player); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");

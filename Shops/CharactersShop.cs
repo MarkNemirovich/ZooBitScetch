@@ -72,11 +72,11 @@ namespace ZooBitSketch
                     switch (Currency)
                     {
                         case Currency.Money:
-                            if (player.Purse.Money >= Cost)
+                            if (player.Wallet.Money >= Cost)
                             {
                                 if (deck.TryAddCards(OpenBox(box, player.Lvl), out int DNA))
                                 {
-                                    player.Purse.Spend(box.Cost(), DNA);
+                                    player.Wallet.Pay(box.Cost());
                                     continue;
                                 }
                             }
@@ -88,11 +88,11 @@ namespace ZooBitSketch
                             }
                             break;
                         case Currency.Diamonds:
-                            if (player.Purse.Diamonds >= Cost)
+                            if (player.Wallet.Diamonds >= Cost)
                             {
                                 if (deck.TryAddCards(OpenBox(box, player.Lvl), out int DNA))
                                 {
-                                    player.Purse.Spend(box.Cost(), DNA);
+                                    player.Wallet.Pay(box.Cost());
                                     continue;
                                 }
                             }
