@@ -27,5 +27,9 @@ namespace ZooBitSketch
                 case Currency.DNA: DNA -= pay.cost; break;
             }
         }
+        public void DecayCharacter(Rareness rareness)
+        {
+            DNA += (int)Rareness.Ordinary / (int)rareness;
+        }
     }
 }

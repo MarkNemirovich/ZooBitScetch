@@ -7,6 +7,7 @@ namespace ZooBitSketch
 {
     internal class Team<T> : AbstractPack<Character>
     {
+        public event Action<Rareness> Decay;
         public Team(int size) : base(size)
         {
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
@@ -56,7 +57,7 @@ namespace ZooBitSketch
                 if (copy.Phase < Phase.Adult)
                     Pack[index].AddCopy();
                 else
-                    ; // cashBack is needed
+                    Decay?.Invoke(newItem.Rareness);
             }
             else
                 Pack.Add(newItem);

@@ -24,6 +24,8 @@ namespace ZooBitSketch
             Deck = new Deck<Card>(_maxSize);
             Team = new Team<Character>(_maxSize);
             Wardrobe = new Wardrobe<Clothes>(_maxSize);
+
+            Team.Decay += Wallet.DecayCharacter;
         }
         public void AddExp(int exp)
         {
