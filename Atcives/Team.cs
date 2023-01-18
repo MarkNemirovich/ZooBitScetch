@@ -18,36 +18,6 @@ namespace ZooBitSketch
             }
             Console.ReadLine();
         }
-        public bool TryAddCards(Character[] newCharacters, out int DNA)
-        {
-            DNA = 0;
-            if (Pack.Count + newCharacters.Length < Pack.Capacity)
-            {
-                Console.Clear();
-                foreach (Character character in newCharacters)
-                {
-                    if (Pack.Any(deck=>deck.Name == character.Name))
-                    {
-                        var copy = Pack.First(deck => deck.Name == character.Name);
-                        int index = Pack.IndexOf(copy);
-                        if (copy.Phase < Phase.Adult)
-                            Pack[index].AddCopy();
-                        else
-                            DNA += (int)character.Rareness;
-                    }
-                    else
-                        Pack.Add(character);
-                    Console.WriteLine(character.Info(), Console.ForegroundColor = character.ChooseColor());
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                Console.WriteLine("You have got these characters. Congradulations!\nPress any key for continue...");
-                Console.ReadKey();
-                return true;
-            }
-            Console.WriteLine("You have no enough place in the team. Buy more.\nPress any key for continue...");
-            Console.ReadKey();
-            return false;
-        }
         sealed public override void Add(Character newItem)
         {
             if (Pack.Any(deck => deck.Name == newItem.Name))

@@ -40,7 +40,7 @@ namespace ZooBitSketch
                                 TryPurchase(customer, Boxes[selection-1]);
                                 break;
                             case 2:
-                                Info();
+                                Console.WriteLine(Boxes[selection - 1].Info(customer.Lvl));
                                 break;
                             default:
                                 Console.WriteLine("No such command\nPress any key for continue...");
