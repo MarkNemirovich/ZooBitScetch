@@ -38,34 +38,41 @@ namespace ZooBitSketch
             {
                 Rareness rareness;
                 int dice = rand.Next(0, 100);
-                if (dice < 39)
+                if (_currency == Currency.Money)
+                    dice = (int)(dice*0.9);
+                if (dice < 54)
                     rareness = Rareness.Ordinary;
-                else if (dice < 69)
+                else if (dice < 79)
                     rareness = Rareness.Rare;
-                else if (dice < 89)
+                else if (dice < 94)
                     rareness = Rareness.Elite;
                 else if (dice < 99)
                     rareness = Rareness.Epic;
                 else
                     rareness = Rareness.Legendary;
-                dice = rand.Next(0, 3);
+                dice = rand.Next(0, 8);
                 switch (dice)
                 {
                     case 0:
+                    case 1:
+                    case 2:
                         {
                             CardsGallery array = new CardsGallery(rareness);
                             dice = rand.Next(0, array.CurrentList.Length);
                             content.Add((Active)array.CurrentList[dice]);
                             break;
                         }
-                    case 1:
+                    case 3:
+                    case 4:
+                    case 5:
                         {
                             ClothesGallery array = new ClothesGallery(rareness);
                             dice = rand.Next(0, array.CurrentList.Length);
                             content.Add((Active)array.CurrentList[dice]);
                             break;
                         }
-                    case 2:
+                    case 6:
+                    case 7:
                         {
                             CharactersGallery array = new CharactersGallery(rareness);
                             dice = rand.Next(0, array.CurrentList.Length);
