@@ -9,8 +9,8 @@ namespace ZooBitSketch
         public int DNA { get; private set; }
         public Wallet()
         {
-            Money = 10000;
-            Diamonds = 10000;
+            Money = 1000;
+            Diamonds = 1000;
             DNA = 0;
         }
         public void Info()

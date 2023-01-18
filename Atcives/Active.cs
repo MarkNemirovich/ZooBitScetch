@@ -70,7 +70,7 @@ namespace ZooBitSketch
         }
         public string Info()
         {
-            string text =$"\nName: {Name, -10}\nGUID: {Convert.ToString(Guid,2)}\n" +
+            string text =$"\nType: {this.GetType().Name,-10}\tName: {Name, -10}\tGUID: {Convert.ToString(Guid,2)}\n" +
                 $"Rareness: {Rareness.ToString(),-10}Phase: {Phase.ToString(),-10}Class: {Role.ToString(),-10}Genre: {Genre.ToString()}\n" +
                 $"{States.Info()}";
             return (text);

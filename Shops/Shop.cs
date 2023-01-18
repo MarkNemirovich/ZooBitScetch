@@ -71,6 +71,7 @@ namespace ZooBitSketch
                     }
                     else
                     {
+                        Console.WriteLine($"You get:\n");
                         actives = box.Open();
                         customer.Wallet.Pay(cost);
                         FillTheSlots(customer, actives);
@@ -84,6 +85,7 @@ namespace ZooBitSketch
                     }
                     else
                     {
+                        Console.WriteLine($"You get:\n");
                         actives = box.Open();
                         customer.Wallet.Pay(cost);
                         FillTheSlots(customer, actives);
@@ -128,7 +130,7 @@ namespace ZooBitSketch
         private void Info()
         {
             Console.Clear();
-            Console.WriteLine($"Welcome to the {this.GetType()} shop.");
+            Console.WriteLine($"Welcome to the {this.GetType().Name} shop.");
         }
     }
 }

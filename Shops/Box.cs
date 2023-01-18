@@ -73,7 +73,6 @@ namespace ZooBitSketch
                             break;
                         }
                 }
-                Console.WriteLine($"{i + 1} - {content[i].Name} {content[i].Rareness} {content[i].Genre} {content[i].Role}");
             }
             return content.ToArray();
         }

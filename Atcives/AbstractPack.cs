@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 
@@ -21,8 +22,19 @@ namespace ZooBitSketch
             {
                 WriteList();
                 request = Console.ReadLine();
-                Console.WriteLine("It is empty yet.\nPress any key for continue...");
-                Console.ReadKey();
+                if (Int32.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
+                {
+                    string text = Pack[result - 1].Info();
+                    Console.WriteLine(text, Console.ForegroundColor = Pack[result - 1].ChooseColor());
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nPress any key for continue...");
+                    Console.ReadKey();
+                }
+                else if (request != "exit")
+                {
+                    Console.WriteLine("No character with such number. Check your input\nPress any key for continue...");
+                    Console.ReadKey();
+                }
             } while (request != "exit");
         }
         protected virtual void WriteList()
@@ -33,6 +45,7 @@ namespace ZooBitSketch
         public virtual void Add(T newItem)
         {
             Pack.Add(newItem);
+            Console.WriteLine(newItem.Info());
         }
     }
 }

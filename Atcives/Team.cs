@@ -10,7 +10,12 @@ namespace ZooBitSketch
         public Team(int size) : base(size)
         {
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            TryAddCards(gallery.StartedPack(Pack.Count), out int DNA);
+            var initialParty = gallery.StartedPack(Pack.Count);
+            foreach (var part in initialParty)
+            {
+                Add(part);
+            }
+            Console.ReadLine();
         }
         public bool TryAddCards(Character[] newCharacters, out int DNA)
         {
@@ -42,6 +47,21 @@ namespace ZooBitSketch
             Console.ReadKey();
             return false;
         }
+        sealed public override void Add(Character newItem)
+        {
+            if (Pack.Any(deck => deck.Name == newItem.Name))
+            {
+                var copy = Pack.First(deck => deck.Name == newItem.Name);
+                int index = Pack.IndexOf(copy);
+                if (copy.Phase < Phase.Adult)
+                    Pack[index].AddCopy();
+                else
+                    ; // cashBack is needed
+            }
+            else
+                Pack.Add(newItem);
+            Console.WriteLine(newItem.Info());
+        }
         sealed public override void Info()
         {
             Pack.Sort(delegate (Character x, Character y)
@@ -72,7 +92,7 @@ namespace ZooBitSketch
         sealed protected override void WriteList()
         {
             base.WriteList();
-            Console.WriteLine($"Amount of characters you have is {Pack.Count}\nMaximum amoun is {Pack.Capacity}.\n" +
+            Console.WriteLine($"Amount of characters you have is {Pack.Count}\nMaximum amount is {Pack.Capacity}.\n" +
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
             for (int i = 0; i < Pack.Count; i++)
             {

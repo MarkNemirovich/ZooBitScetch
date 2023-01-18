@@ -11,7 +11,7 @@ namespace ZooBitSketch
             new GeneralBox( 100, Currency.Money, BoxSize.Large ),
             new GeneralBox( 5, Currency.Diamonds, BoxSize.Small ),
             new GeneralBox( 25, Currency.Diamonds, BoxSize.Middle ),
-            new GeneralBox( 50, Currency.Diamonds, BoxSize.Large )
+            new GeneralBox( 100, Currency.Diamonds, BoxSize.Large )
         }) { }
     }
 }
