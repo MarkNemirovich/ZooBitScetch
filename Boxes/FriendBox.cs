@@ -33,7 +33,7 @@ namespace ZooBitSketch
         sealed protected override bool CheckMoney(Wallet wallet)
         {
             var cost = Cost();
-            return wallet.Money >= cost.Item1;
+            return wallet.Heart >= cost.Item1;
         }
     }
 }

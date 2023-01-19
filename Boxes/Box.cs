@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ZooBitSketch.PlayerThings;
+using System.Linq;
+using ZooBitSketch;
 
 namespace ZooBitSketch
 {
@@ -10,7 +11,7 @@ namespace ZooBitSketch
         public readonly string Name;
         private int _price;
         private Currency _currency;
-        private readonly Random rand = new Random();
+        protected readonly Random rand = new Random();
         public Box(int price, Currency currency, BoxSize size)
         {
             _price = price;
@@ -33,7 +34,7 @@ namespace ZooBitSketch
             {
                 Rareness rareness = GetRareness(customer.Lvl);
                 Active[] array = GetActiveArray(rareness);
-                content.Add(GetActive(array));
+                content.Add(GetActive(array.ToList()));
             }
             actives = content.ToArray();
             return true;
@@ -80,9 +81,9 @@ namespace ZooBitSketch
             }
             return actives;
         }
-        private Active GetActive(Active[] actves)
+        protected virtual Active GetActive(List<Active> actves)
         {
-            int dice = rand.Next(0, actves.Length);
+            int dice = rand.Next(0, actves.Count);
             return actves[dice];
         }
         private string ChancesDescription(int playerLvl)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ZooBitSketch.PlayerThings
+namespace ZooBitSketch
 {
     internal class Program
     {
@@ -19,14 +19,16 @@ namespace ZooBitSketch.PlayerThings
 
             Player player = new Player(name);
 
-            GeneralBanner Gbanner = new GeneralBanner();
+            CommonBanner Cbanner = new CommonBanner();
             EliteBanner Ebanner = new EliteBanner();
+            FriendBanner Fbanner = new FriendBanner();
+            GenreBanner Gbanner = new GenreBanner(Genre.Rock);
             string input;
             do
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nGbanner\nEbanner\n");
+                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nCbanner\nEbanner\nFbanner\nGbanner\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -36,8 +38,10 @@ namespace ZooBitSketch.PlayerThings
                     case "Deck": player.Deck.Info(); break;
                     case "Team": player.Team.Info(); break;
                     case "Wardrobe": player.Wardrobe.Info(); break;
-                    case "Gbanner": Gbanner.Entry(player); break;
+                    case "Cbanner": Cbanner.Entry(player); break;
                     case "Ebanner": Ebanner.Entry(player); break;
+                    case "Fbanner": Fbanner.Entry(player); break;
+                    case "Gbanner": Gbanner.Entry(player); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");
