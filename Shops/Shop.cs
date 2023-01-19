@@ -61,39 +61,18 @@ namespace ZooBitSketch
         {
             Active[] actives;
             (int price, Currency currency) cost = box.Cost();
-            switch (cost.currency)
+            if (box.TryOpen(customer, out actives))
             {
-                case Currency.Money:
-                    if (customer.Wallet.Money < cost.price)
-                    {
-                        Console.WriteLine($"You have not enough {cost.currency.ToString().ToLower()} for this");
-                        return false;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"You get:\n");
-                        actives = box.Open();
-                        customer.Wallet.Pay(cost);
-                        FillTheSlots(customer, actives);
-                        return true;
-                    }
-                case Currency.Diamonds:
-                    if (customer.Wallet.Diamonds < cost.price)
-                    {
-                        Console.WriteLine($"You have not enough {cost.currency.ToString().ToLower()} for this");
-                        return false;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"You get:\n");
-                        actives = box.Open();
-                        customer.Wallet.Pay(cost);
-                        FillTheSlots(customer, actives);
-                        return true;
-                    }
+                Console.WriteLine($"You get:\n");
+                customer.Wallet.Pay(cost);
+                FillTheSlots(customer, actives);
+                return true;
             }
-            Console.WriteLine("Unexpected error");
-            return false;
+            else
+            {
+                Console.WriteLine($"You have not enough {cost.currency.ToString().ToLower()} for this");
+                return false;
+            }
         }
         private void FillTheSlots(Player customer, Active[] newActives)
         {
