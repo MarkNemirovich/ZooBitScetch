@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ZooBitSketch
 {
@@ -8,6 +6,7 @@ namespace ZooBitSketch
     {
         Money,
         Diamonds,
-        DNA
+        DNA,
+        Heart
     }
 }

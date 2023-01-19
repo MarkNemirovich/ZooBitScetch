@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace ZooBitSketch
 {
     internal class Wardrobe<T> : AbstractPack<Clothes>
     {
-        public List<Clothes> _clothes { get; private set; }
         public Wardrobe(int size) : base(size)
         {
-            _clothes = new List<Clothes>();
         }
         sealed public override void Info()
         {

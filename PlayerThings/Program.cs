@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 
-namespace ZooBitSketch
+namespace ZooBitSketch.PlayerThings
 {
     internal class Program
     {
@@ -16,17 +15,18 @@ namespace ZooBitSketch
                 name = Console.ReadLine();
                 if (name == null)
                     continue;
-            } while (!name.All(char.IsLetter) || (name[0] < 'A' || name[0] > 'Z') || (name.Substring(1).Any(letter => letter >= 'A' && letter <= 'Z')) || (name.Length == 0 || name.Length > 16));
-            
+            } while (!name.All(char.IsLetter) || name[0] < 'A' || name[0] > 'Z' || name.Substring(1).Any(letter => letter >= 'A' && letter <= 'Z') || name.Length == 0 || name.Length > 16);
+
             Player player = new Player(name);
 
-            GeneralShop Shop = new GeneralShop();
+            GeneralBanner Gbanner = new GeneralBanner();
+            EliteBanner Ebanner = new EliteBanner();
             string input;
             do
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nShop\n");
+                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nGbanner\nEbanner\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -36,7 +36,8 @@ namespace ZooBitSketch
                     case "Deck": player.Deck.Info(); break;
                     case "Team": player.Team.Info(); break;
                     case "Wardrobe": player.Wardrobe.Info(); break;
-                    case "Shop": Shop.Entry(player); break;
+                    case "Gbanner": Gbanner.Entry(player); break;
+                    case "Ebanner": Ebanner.Entry(player); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");

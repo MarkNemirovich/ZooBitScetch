@@ -1,14 +1,15 @@
 ﻿using System;
+using ZooBitSketch.PlayerThings;
 
 namespace ZooBitSketch
 {
-    internal abstract class Shop
+    internal abstract class Banner
     {
         public readonly string Name;
         protected readonly Box[] Boxes;
-        protected Shop(string name, Box[] boxes)
+        protected Banner(Box[] boxes)
         {
-            Name = name;
+            Name = this.GetType().Name;
             Boxes = boxes;
         }
         public void Entry(Player customer)
@@ -95,7 +96,7 @@ namespace ZooBitSketch
                 }
             }
         }
-        protected virtual void Description()
+        private void Description()
         {
             Console.WriteLine($"We have {Boxes.Length} boxes:\nWhat box do you interested in?\nFor exit write \"exit.\"");
             for (int i = 1; i <= Boxes.Length; i++)
@@ -109,7 +110,7 @@ namespace ZooBitSketch
         private void Info()
         {
             Console.Clear();
-            Console.WriteLine($"Welcome to the {this.GetType().Name} shop.");
+            Console.WriteLine($"Welcome to the {Name} shop.");
         }
     }
 }

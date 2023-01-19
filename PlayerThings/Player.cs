@@ -20,7 +20,7 @@ namespace ZooBitSketch
             Exp = 0;
             _maxSize = 1000;
             Wallet = new Wallet();
-            Bag= new Bag();
+            Bag = new Bag();
             Deck = new Deck<Card>(_maxSize);
             Team = new Team<Character>(_maxSize);
             Wardrobe = new Wardrobe<Clothes>(_maxSize);
@@ -29,15 +29,15 @@ namespace ZooBitSketch
         }
         public void AddExp(int exp)
         {
-            Exp+=exp;
+            Exp += exp;
             if (Exp > Lvl * 100)
                 LvlUP();
         }
         private void LvlUP()
         {
-            Exp-= Lvl*100;
+            Exp -= Lvl * 100;
             Lvl++;
-            if(Lvl%5 == 0)
+            if (Lvl % 5 == 0)
                 _maxSize++;
         }
         public void Info()
