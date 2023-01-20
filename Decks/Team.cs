@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ZooBitSketch
 {
-    internal class Team<T> : AbstractPack<Character>
+    internal class Team<T> : AbstractDeck<Character>
     {
         public event Action<Rareness> Decay;
         public Team(int size) : base(size)
@@ -42,7 +42,7 @@ namespace ZooBitSketch
             {
                 WriteList();
                 request = Console.ReadLine();
-                if (Int32.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
+                if (int.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
                 {
                     string text = Pack[result - 1].Info();
                     text += $"\nCopies for evolution: {Pack[result - 1].Copies}/{(int)Pack[result - 1].Rareness}";
@@ -65,8 +65,9 @@ namespace ZooBitSketch
                 $"If you want to know anything about character, white ID. For exit write \"exit.\"\n");
             for (int i = 0; i < Pack.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Phase}", Console.ForegroundColor = Pack[i].ChooseColor());
+                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Phase} {Pack[i].States.Power }", Console.ForegroundColor = Pack[i].ChooseColor());
             }
         }
+        sealed protected override void Remove(object newItem) { /*No need to do anything*/ }
     }
 }

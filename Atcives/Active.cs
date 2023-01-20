@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace ZooBitSketch
 {
@@ -7,14 +8,13 @@ namespace ZooBitSketch
         public int Guid { get; private set; }
         public string Name { get; private set; }
         public States States { get; private set; }
-        public Phase Phase { get; private set; }
         public readonly Rareness Rareness;
         public readonly Role Role;
         public readonly Genre Genre;
-        protected Active(string name, Phase phase, Rareness rareness, Role role, Genre genre, States states)
+        public event Action<object> IWasSacrificed;
+        protected Active(string name, Rareness rareness, Role role, Genre genre, States states)
         {
             Name = name;
-            Phase = phase;
             Rareness = rareness;
             Role = role;
             Genre = genre;
@@ -52,22 +52,25 @@ namespace ZooBitSketch
         }
         public virtual void Evolve()
         {
-            Phase++;
-            States.Evolve(2 + (double)Phase/10);
+            States.Evolve(1);
             States.CalculatePower();
         }
-        public int CompareTo(Active another)
+        public virtual int CompareTo(Active another)
         {
             int first = Rareness.CompareTo(another.Rareness);
             if (first != 0) { return first; }
-            else return -Phase.CompareTo(another.Phase);
+            else return -States.Power.CompareTo(another.States.Power);
         }
-        public string Info()
+        public virtual string Info()
         {
             string text =$"\nType: {this.GetType().Name,-10}\tName: {Name, -10}\tGUID: {Convert.ToString(Guid,2)}\n" +
-                $"Rareness: {Rareness.ToString(),-10}Phase: {Phase.ToString(),-10}Class: {Role.ToString(),-10}Genre: {Genre.ToString()}\n" +
+                $"Rareness: {Rareness.ToString(),-10}Class: {Role.ToString(),-10}Genre: {Genre.ToString()}\n" +
                 $"{States.Info()}";
             return (text);
+        }
+        public virtual void Sacrifice()
+        {
+            IWasSacrificed?.Invoke((object)this);
         }
     }
 }

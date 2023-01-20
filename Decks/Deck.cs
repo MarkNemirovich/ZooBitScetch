@@ -2,7 +2,7 @@
 
 namespace ZooBitSketch
 {
-    internal class Deck<T> : AbstractPack<Card>
+    internal class Deck<T> : AbstractDeck<Card>
     {
         public Deck(int size) : base(size)
         {
@@ -17,12 +17,21 @@ namespace ZooBitSketch
         }
         sealed protected override void WriteList()
         {
-            base.WriteList(); 
+            base.WriteList();
             Console.WriteLine($"Amount of cards you have is {Pack.Count}\n" +
                 $"If you want to know anything about cards, white number. For exit write \"exit.\"\n");
             for (int i = 0; i < Pack.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Phase}", Console.ForegroundColor = Pack[i].ChooseColor());
+                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].States.Power }", Console.ForegroundColor = Pack[i].ChooseColor());
+            }
+        }
+        sealed protected override void Remove(object newItem)
+        {
+            Card forRemoving = newItem as Card;
+            if (forRemoving != null)
+            {
+                Pack.Remove(forRemoving);
+                Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }
         }
     }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ZooBitSketch
 {
-    internal abstract class AbstractPack<T> where T : Active
+    internal abstract class AbstractDeck<T> where T : Active
     {
         public string Name { get; private set; }
         public List<T> Pack { get; private set; }
-        protected AbstractPack(int size)
+        protected AbstractDeck(int size)
         {
-            Name = typeof(T).Name; 
+            Name = typeof(T).Name;
             Pack = new List<T>(size);
         }
         public virtual void Info()
@@ -19,7 +20,7 @@ namespace ZooBitSketch
             {
                 WriteList();
                 request = Console.ReadLine();
-                if (Int32.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
+                if (int.TryParse(request, out int result) && result > 0 && result <= Pack.Count)
                 {
                     string text = Pack[result - 1].Info();
                     Console.WriteLine(text, Console.ForegroundColor = Pack[result - 1].ChooseColor());
@@ -29,7 +30,7 @@ namespace ZooBitSketch
                 }
                 else if (request != "exit")
                 {
-                    Console.WriteLine("No character with such number. Check your input\nPress any key for continue...");
+                    Console.WriteLine("No active with such number. Check your input\nPress any key for continue...");
                     Console.ReadKey();
                 }
             } while (request != "exit");
@@ -42,7 +43,9 @@ namespace ZooBitSketch
         public virtual void Add(T newItem)
         {
             Pack.Add(newItem);
+            newItem.IWasSacrificed += Remove;
             Console.WriteLine(newItem.Info());
         }
+        protected abstract void Remove(object newItem);
     }
 }

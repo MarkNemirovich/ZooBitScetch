@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ZooBitSketch
 {
-    internal class Wardrobe<T> : AbstractPack<Clothes>
+    internal class Wardrobe<T> : AbstractDeck<Clothes>
     {
         public Wardrobe(int size) : base(size)
         {
@@ -23,7 +23,16 @@ namespace ZooBitSketch
                 $"If you want to know anything about clothes, white number. For exit write \"exit.\"\n");
             for (int i = 0; i < Pack.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Phase}", Console.ForegroundColor = Pack[i].ChooseColor());
+                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].States.Power} ", Console.ForegroundColor = Pack[i].ChooseColor());
+            }
+        }
+        sealed protected override void Remove(object newItem)
+        {
+            Clothes forRemoving = newItem as Clothes;
+            if (forRemoving != null)
+            {
+                Pack.Remove(forRemoving);
+                Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }
         }
     }
