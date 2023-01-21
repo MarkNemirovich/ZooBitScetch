@@ -60,6 +60,16 @@ namespace ZooBitSketch
                 }
             } while (answer != "exit");
         }
+        protected override bool ChooseActive(int baseActiveIndex)
+        {
+            if ((AllSources[baseActiveIndex] as Clothes).PartType == ClothesType.Stone)
+            {
+                Console.WriteLine("Stone cannot be enhances. Choose wearable clothes");
+                return false;
+            }
+            EnhancingActiveIndex = baseActiveIndex;
+            return true;
+        }
         sealed protected override void PrintList()
         {
             AllSources.Sort(delegate (Clothes x, Clothes y)

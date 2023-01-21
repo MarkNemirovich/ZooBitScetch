@@ -8,6 +8,7 @@ namespace ZooBitSketch
         {
             return new Clothes[]
             {
+            new Clothes("Stone", ClothesType.Stone, Rareness.Ordinary, Role.Universal, Genre.Universal, new States(Rareness.Ordinary)),
             new Clothes("Boot1", ClothesType.Boots, Rareness.Ordinary, Role.Singler,Genre.Rap, RandomStates(Rareness.Ordinary)),
             new Clothes("Instrument1", ClothesType.Instrument, Rareness.Ordinary, Role.Drums,Genre.Rock, RandomStates(Rareness.Ordinary)),
             new Clothes("Hat1", ClothesType.Hat, Rareness.Ordinary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Ordinary)),

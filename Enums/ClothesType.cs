@@ -7,6 +7,7 @@ namespace ZooBitSketch
         Instrument,
         Hat,
         Coat,
-        Boots
+        Boots,
+        Stone // upgrade material
     }
 }

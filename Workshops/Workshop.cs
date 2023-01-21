@@ -17,8 +17,8 @@ namespace ZooBitSketch
         }
 
         public void Enhance()
-        { 
-        string answer;
+        {
+            string answer;
             while (true)
             {
                 Info();
@@ -29,10 +29,12 @@ namespace ZooBitSketch
                     break;
                 if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= AllSources.Count)
                 {
-                    ChooseActive(selection - 1);
-                    Source[selection - 1] = (selection - 1, true);
-                    Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
-                    TryChooseSources();
+                    if (ChooseActive(selection - 1))
+                    {
+                        Source[selection - 1] = (selection - 1, true);
+                        Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
+                        TryChooseSources();
+                    }
                 }
                 else
                 {
@@ -41,9 +43,10 @@ namespace ZooBitSketch
                 }
             }
         }
-        private void ChooseActive(int baseActiveIndex)
+        protected virtual bool ChooseActive(int baseActiveIndex)
         {
             EnhancingActiveIndex = baseActiveIndex;
+            return true;
         }
         protected abstract void TryChooseSources();
         protected virtual void UpgradeActive()
