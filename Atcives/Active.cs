@@ -35,7 +35,7 @@ namespace ZooBitSketch
                 typeSum += (byte)letter;
             foreach (char letter in Name)
                 nameSum += (byte)letter;
-            return (typeSum << 20) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
+            return (typeSum << 24) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
         }
         public ConsoleColor ChooseColor()
         {

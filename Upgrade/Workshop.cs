@@ -6,26 +6,44 @@ namespace ZooBitSketch
     internal abstract class Workshop<T> where T : Active
     {
         public readonly string Name;
-        protected List<(T active, bool isChoosen)> AllSources;
+        protected List<T> AllSources;
+        protected (int indexInThePack, bool isUsed)[] Source;
         public Active EnhancingActive { get; protected set; }
         public List<Active> EnhancingMaterials { get; protected set; }
-        public Workshop(T[] pack)
+        public Workshop(List<T> pack)
         {
-            for (int i = 0; i < pack.Length; i++)
-            {
-                AllSources.Add((pack[i], false));
-            }
+            AllSources= pack;
+            EnhancingMaterials = new List<Active>();
+            Source = new (int, bool)[AllSources.Count];
             Info();
             string answer;
             while (true)
             {
                 answer = Console.ReadLine();
-                if (answer != "exit")
+                if (answer == "exit")
                     break;
                 if (Int32.TryParse(answer, out int selection) && selection > 0 && selection < AllSources.Count)
                 {
-                    ChooseActive(AllSources[selection - 1].active);
-                    AllSources[selection - 1].isChoosen = true;
+                    ChooseActive(AllSources[selection - 1]);
+                    Source[selection - 1] = (selection - 1, true);
+                    Console.WriteLine($"{MaterialChoose()}\nPress \"fin\" for finish");
+                    do
+                    {
+                        answer = Console.ReadLine();
+                        if (Int32.TryParse(answer, out selection) && selection > 0 && selection < AllSources.Count)
+                        {
+                            if (Source[selection - 1].isUsed)
+                            {
+                                Console.WriteLine("This active already choosen, try another one");
+                                continue;
+                            }
+                            else
+                            {
+                                bool success = TryAddAsSource(AllSources[selection - 1]);
+                                Source[selection - 1] = (selection - 1, true);
+                            }
+                        }
+                    } while (answer != "fin");
                 }
                 else
                 {
@@ -44,9 +62,10 @@ namespace ZooBitSketch
             foreach (var Active in EnhancingMaterials)
                 Active.Sacrifice();
         }
-        protected virtual void AddAsSource(T material)
+        protected virtual bool TryAddAsSource(T material)
         {
             EnhancingMaterials.Add(material);
+            return true;
         }
         public virtual void Info()
         {
@@ -59,9 +78,13 @@ namespace ZooBitSketch
         {
             for (int i = 0; i < AllSources.Count; i++)
             {
-                var act = AllSources[i].active;
+                var act = AllSources[i];
                 Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness}");
             }
+        }
+        protected virtual string MaterialChoose()
+        {
+            return "Choose the cards to upgrade your card";
         }
     }
 }

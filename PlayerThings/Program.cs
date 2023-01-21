@@ -13,8 +13,6 @@ namespace ZooBitSketch
                 Console.Clear();
                 Console.WriteLine("Write the name, using only ENG letters.\nNo more than 15 symbols.\nFirst have to be capital.\n");
                 name = Console.ReadLine();
-                if (name == null)
-                    continue;
             } while (!name.All(char.IsLetter) || name[0] < 'A' || name[0] > 'Z' || name.Substring(1).Any(letter => letter >= 'A' && letter <= 'Z') || name.Length == 0 || name.Length > 16);
 
             Player player = new Player(name);
@@ -23,15 +21,16 @@ namespace ZooBitSketch
             EliteBanner Ebanner = new EliteBanner();
             FriendBanner Fbanner = new FriendBanner();
             GenreBanner Gbanner = new GenreBanner(Genre.Rock);
-            CardsWorkshop Workshop = new CardsWorkshop(player.Deck.Pack.ToArray());
-            Smithy Smithy = new Smithy(player.Wardrobe.Pack.ToArray());
+            CardsWorkshop Workshop;
+            Smithy Smithy;
 
             string input;
             do
             {
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
-                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\nCbanner\nEbanner\nFbanner\nGbanner\n");
+                    "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\n" +
+                    "Cbanner\nEbanner\nFbanner\nGbanner\nWorkshop\nSmithy\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -45,6 +44,8 @@ namespace ZooBitSketch
                     case "Ebanner": Ebanner.Entry(player); break;
                     case "Fbanner": Fbanner.Entry(player); break;
                     case "Gbanner": Gbanner.Entry(player); break;
+                    case "Workshop": Workshop = new CardsWorkshop(player.Deck.Pack); break;
+                    case "Smithy": Smithy = new Smithy(player.Wardrobe.Pack); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");

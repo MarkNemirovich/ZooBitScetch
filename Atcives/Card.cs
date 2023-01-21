@@ -12,6 +12,16 @@ namespace ZooBitSketch
             Quality = Quality.Bronse;
             _type = type;
         }
+        public override int GetHashCode()
+        {
+            byte typeSum = 0;
+            byte nameSum = 0;
+            foreach (char letter in this.GetType().Name)
+                typeSum += (byte)letter;
+            foreach (char letter in Name)
+                nameSum += (byte)letter;
+            return (typeSum << 24) | ((byte)Quality << 20) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
+        }
         sealed public override void Evolve()
         {
             Quality++;

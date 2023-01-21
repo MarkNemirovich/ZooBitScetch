@@ -22,6 +22,16 @@ namespace ZooBitSketch
                 _copies = 0;
             }
         }
+        public override int GetHashCode()
+        {
+            byte typeSum = 0;
+            byte nameSum = 0;
+            foreach (char letter in this.GetType().Name)
+                typeSum += (byte)letter;
+            foreach (char letter in Name)
+                nameSum += (byte)letter;
+            return (typeSum << 24) | ((byte)Phase << 20) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
+        }
         sealed public override int CompareTo(Active another)
         {
             Character character = (another as Character);
