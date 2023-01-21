@@ -2,9 +2,10 @@
 
 namespace ZooBitSketch
 {
-    internal class CardsWorkshop : Workshop
+    internal class CardsWorkshop : Workshop<Card>
     {
-        protected override void AddAsSource(Active source)
+        public CardsWorkshop(Card[] pack) : base(pack) { }
+        protected override void AddAsSource(Card source)
         {
             Card target = enhancingActive as Card;
             Card material = source as Card;
