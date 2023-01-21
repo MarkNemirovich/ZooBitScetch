@@ -23,6 +23,9 @@ namespace ZooBitSketch
             EliteBanner Ebanner = new EliteBanner();
             FriendBanner Fbanner = new FriendBanner();
             GenreBanner Gbanner = new GenreBanner(Genre.Rock);
+            CardsWorkshop Workshop = new CardsWorkshop(player.Deck.Pack.ToArray());
+            Smithy Smithy = new Smithy(player.Wardrobe.Pack.ToArray());
+
             string input;
             do
             {

@@ -7,13 +7,13 @@ namespace ZooBitSketch
         public CardsWorkshop(Card[] pack) : base(pack) { }
         protected override void AddAsSource(Card source)
         {
-            Card target = enhancingActive as Card;
+            Card target = EnhancingActive as Card;
             Card material = source as Card;
             if (material != null)
             {
                 if (material.Quality == target.Quality)
                 {
-                    enhancingMaterials.Add(material);
+                    EnhancingMaterials.Add(material);
                     UpgradeActive();
                 }
             }

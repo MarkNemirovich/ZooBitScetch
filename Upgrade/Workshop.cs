@@ -7,8 +7,8 @@ namespace ZooBitSketch
     {
         public readonly string Name;
         protected List<(T active, bool isChoosen)> AllSources;
-        public Active enhancingActive { get; protected set; }
-        public List<Active> enhancingMaterials { get; protected set; }
+        public Active EnhancingActive { get; protected set; }
+        public List<Active> EnhancingMaterials { get; protected set; }
         public Workshop(T[] pack)
         {
             for (int i = 0; i < pack.Length; i++)
@@ -36,17 +36,17 @@ namespace ZooBitSketch
         }
         public void ChooseActive(T baseActive)
         {
-            enhancingActive = baseActive;
+            EnhancingActive = baseActive;
         }
         protected virtual void UpgradeActive()
         {
-            enhancingActive.Evolve();
-            foreach(var Active in enhancingMaterials)
+            EnhancingActive.Evolve();
+            foreach (var Active in EnhancingMaterials)
                 Active.Sacrifice();
         }
         protected virtual void AddAsSource(T material)
         {
-            enhancingMaterials.Add(material);
+            EnhancingMaterials.Add(material);
         }
         public virtual void Info()
         {
@@ -60,7 +60,7 @@ namespace ZooBitSketch
             for (int i = 0; i < AllSources.Count; i++)
             {
                 var act = AllSources[i].active;
-                Console.WriteLine($"{i+1} - {act.Name,-10} {act.Rareness}");
+                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness}");
             }
         }
     }
