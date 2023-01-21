@@ -12,7 +12,7 @@ namespace ZooBitSketch
         {
             PartType = type;
             EnhanceLevel = 0;
-            EnhanceCost = 100;
+            EnhanceCost = 10 * (int)Rareness.Ordinary / (int)rareness;
         }
         public override int GetHashCode()
         {
@@ -44,7 +44,7 @@ namespace ZooBitSketch
         }
         public int CalculateEnhanceCost()
         {
-            return (int)Rareness.Ordinary / (int)Rareness * EnhanceLevel;
+            return (int)Rareness.Ordinary / (int)Rareness * (EnhanceLevel+1);
         }
     }
 }

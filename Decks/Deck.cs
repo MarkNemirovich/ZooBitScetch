@@ -4,6 +4,7 @@ namespace ZooBitSketch
 {
     internal class Deck<T> : AbstractDeck<Card>
     {
+        public static readonly int BATTLE_LIMIT = 15;
         public Deck(int size) : base(size)
         {
         }

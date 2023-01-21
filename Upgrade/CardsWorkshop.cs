@@ -12,6 +12,11 @@ namespace ZooBitSketch
         }
         sealed protected override bool TryAddAsSource(int materialIndex)
         {
+            if (AllSources.Count <= Deck<Card>.BATTLE_LIMIT)
+            {
+                Console.WriteLine($"It is impossible to make merge now.\nYou have to keep at least {Deck<Card>.BATTLE_LIMIT} cards for battle.");
+                return false;
+            }
             Card material = AllSources[EnhancingActiveIndex] as Card;
             Card target = AllSources[materialIndex] as Card;
             if (material != null)
@@ -23,11 +28,11 @@ namespace ZooBitSketch
                     return true;
                 }
                 else
-                    Console.WriteLine("Card have to be the same quality. Choose another card, please");
+                    Console.WriteLine("Card have to be the same quality. Choose another card, please.");
             }
             else
             {
-                Console.WriteLine("It is not a card. Choose the card, please");
+                Console.WriteLine("It is not a card. Choose the card, please.");
             }
             return false;
         }

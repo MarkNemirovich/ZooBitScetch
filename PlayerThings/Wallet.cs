@@ -17,7 +17,7 @@ namespace ZooBitSketch
         }
         public void Info()
         {
-            Console.WriteLine($"Money = {Money}\nDiamonds = {Diamond}\nDNA = {DNA}\n\nPress any key for continue...");
+            Console.WriteLine($"Money = {Money}\nDiamonds = {Diamond}\nDNA = {DNA}\nHeart = {Heart}\nPress any key for continue...");
             Console.ReadKey();
         }
         public void Pay((int cost, Currency currency) pay)

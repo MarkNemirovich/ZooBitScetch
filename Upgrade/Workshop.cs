@@ -72,7 +72,7 @@ namespace ZooBitSketch
             for (int i = 0; i < AllSources.Count; i++)
             {
                 var act = AllSources[i];
-                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness}", Console.ForegroundColor = act.ChooseColor());
+                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness} {act.States.Power,-10}", Console.ForegroundColor = act.ChooseColor());
             }
         }
         protected virtual string MaterialChoose()
