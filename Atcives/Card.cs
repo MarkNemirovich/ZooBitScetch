@@ -4,7 +4,7 @@ namespace ZooBitSketch
 {
     internal class Card : Active
     {
-        private CardType _type;
+        private readonly CardType _type;
         public Quality Quality { get; private set; }
         public Card(string name, CardType type, Rareness rareness, Role role, Genre genre, States states)
             : base(name, rareness, role, genre, states)

@@ -31,6 +31,30 @@ namespace ZooBitSketch
             }
             return false;
         }
+        sealed protected override void TryChooseSources()
+        {
+            string answer;
+            do
+            {
+                answer = Console.ReadLine();
+                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= AllSources.Count)
+                {
+                    if (Source[selection - 1].isUsed)
+                    {
+                        Console.WriteLine("This active already choosen, try another one");
+                        continue;
+                    }
+                    else
+                    {
+                        bool success = TryAddAsSource(selection - 1);
+                        Source[selection - 1] = (selection - 1, success);
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
+            } while (answer != "exit");
+        }
         sealed protected override void PrintList()
         {
             AllSources.Sort(delegate (Card x, Card y)

@@ -31,6 +31,7 @@ namespace ZooBitSketch
             Clothes forRemoving = newItem as Clothes;
             if (forRemoving != null)
             {
+                forRemoving.IWasSacrificed -= Remove;
                 Pack.Remove(forRemoving);
                 Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }

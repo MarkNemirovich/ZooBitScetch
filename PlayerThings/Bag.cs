@@ -11,5 +11,9 @@ namespace ZooBitSketch
             Console.WriteLine($"Empty yet\n\nPress any key for continue...");
             Console.ReadKey();
         }
+        public void AddSurplusEnhanceMaterial(int material)
+        {
+            Stone += material;
+        }
     }
 }

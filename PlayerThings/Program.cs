@@ -44,8 +44,16 @@ namespace ZooBitSketch
                     case "Ebanner": Ebanner.Entry(player); break;
                     case "Fbanner": Fbanner.Entry(player); break;
                     case "Gbanner": Gbanner.Entry(player); break;
-                    case "Workshop": Workshop = new CardsWorkshop(player.Deck.Pack); break;
-                    case "Smithy": Smithy = new Smithy(player.Wardrobe.Pack); break;
+                    case "Workshop": 
+                        Workshop = new CardsWorkshop(player.Deck.Pack);
+                        Workshop.Enhance();
+                        break;
+                    case "Smithy": 
+                        Smithy = new Smithy(player.Wardrobe.Pack);
+                        Smithy.EnhenceSurplus += player.Bag.AddSurplusEnhanceMaterial;
+                        Smithy.Enhance();
+                        Smithy.EnhenceSurplus -= player.Bag.AddSurplusEnhanceMaterial;
+                        break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");

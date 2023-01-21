@@ -30,6 +30,7 @@ namespace ZooBitSketch
             Card forRemoving = newItem as Card;
             if (forRemoving != null)
             {
+                forRemoving.IWasSacrificed -= Remove;
                 Pack.Remove(forRemoving);
                 Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }

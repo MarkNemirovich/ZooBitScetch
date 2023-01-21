@@ -13,8 +13,12 @@ namespace ZooBitSketch
         public List<int> EnhancingMaterialsIndexes { get; protected set; }
         public Workshop(List<T> pack)
         {
-            AllSources= pack;
-            string answer;
+            AllSources = pack;
+        }
+
+        public void Enhance()
+        { 
+        string answer;
             while (true)
             {
                 Info();
@@ -28,26 +32,7 @@ namespace ZooBitSketch
                     ChooseActive(selection - 1);
                     Source[selection - 1] = (selection - 1, true);
                     Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
-                    do
-                    {
-                        answer = Console.ReadLine();
-                        if (Int32.TryParse(answer, out selection) && selection > 0 && selection <= AllSources.Count)
-                        {
-                            if (Source[selection - 1].isUsed)
-                            {
-                                Console.WriteLine("This active already choosen, try another one");
-                                continue;
-                            }
-                            else
-                            {
-                                bool success = TryAddAsSource(selection - 1);
-                                Source[selection - 1] = (selection - 1, true);
-                                Console.WriteLine("Press any key to continue...");
-                                Console.ReadKey();
-                                break;
-                            }
-                        }
-                    } while (answer != "exit");
+                    TryChooseSources();
                 }
                 else
                 {
@@ -56,10 +41,11 @@ namespace ZooBitSketch
                 }
             }
         }
-        public void ChooseActive(int baseActiveIndex)
+        private void ChooseActive(int baseActiveIndex)
         {
             EnhancingActiveIndex = baseActiveIndex;
         }
+        protected abstract void TryChooseSources();
         protected virtual void UpgradeActive()
         {
             AllSources[EnhancingActiveIndex].Evolve();

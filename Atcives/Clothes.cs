@@ -4,13 +4,13 @@ namespace ZooBitSketch
 {
     internal class Clothes : Active
     {
-        private ClothesType _type;
+        public readonly ClothesType PartType;
         public int EnhanceLevel { get; private set; }
         public int EnhanceCost { get; private set; }
         public Clothes(string name, ClothesType type, Rareness rareness, Role role, Genre genre, States states)
             : base(name, rareness, role, genre, states)
         {
-            _type = type;
+            PartType = type;
             EnhanceLevel = 0;
             EnhanceCost = 100;
         }
@@ -34,13 +34,17 @@ namespace ZooBitSketch
         sealed public override int CompareTo(Active another)
         {
             Clothes clothes = another as Clothes;
-            int first = _type.CompareTo(clothes._type);
+            int first = PartType.CompareTo(clothes.PartType);
             if (first != 0) { return first; }
             first = Rareness.CompareTo(clothes.Rareness);
             if (first != 0) { return first; }
             first = -EnhanceLevel.CompareTo(clothes.EnhanceLevel);
             if (first != 0) { return first; }
             else return -States.Power.CompareTo(clothes.States.Power);
+        }
+        public int CalculateEnhanceCost()
+        {
+            return (int)Rareness.Ordinary / (int)Rareness * EnhanceLevel;
         }
     }
 }
