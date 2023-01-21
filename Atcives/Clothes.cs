@@ -31,5 +31,16 @@ namespace ZooBitSketch
             States.Evolve(1.1);
             States.CalculatePower();
         }
+        sealed public override int CompareTo(Active another)
+        {
+            Clothes clothes = another as Clothes;
+            int first = _type.CompareTo(clothes._type);
+            if (first != 0) { return first; }
+            first = Rareness.CompareTo(clothes.Rareness);
+            if (first != 0) { return first; }
+            first = -EnhanceLevel.CompareTo(clothes.EnhanceLevel);
+            if (first != 0) { return first; }
+            else return -States.Power.CompareTo(clothes.States.Power);
+        }
     }
 }

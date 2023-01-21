@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ZooBitSketch
 {
@@ -8,29 +9,29 @@ namespace ZooBitSketch
         public readonly string Name;
         protected List<T> AllSources;
         protected (int indexInThePack, bool isUsed)[] Source;
-        public Active EnhancingActive { get; protected set; }
-        public List<Active> EnhancingMaterials { get; protected set; }
+        public int EnhancingActiveIndex { get; protected set; }
+        public List<int> EnhancingMaterialsIndexes { get; protected set; }
         public Workshop(List<T> pack)
         {
             AllSources= pack;
-            EnhancingMaterials = new List<Active>();
-            Source = new (int, bool)[AllSources.Count];
-            Info();
             string answer;
             while (true)
             {
+                Info();
+                EnhancingMaterialsIndexes = new List<int>();
+                Source = new (int, bool)[AllSources.Count];
                 answer = Console.ReadLine();
                 if (answer == "exit")
                     break;
-                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection < AllSources.Count)
+                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= AllSources.Count)
                 {
-                    ChooseActive(AllSources[selection - 1]);
+                    ChooseActive(selection - 1);
                     Source[selection - 1] = (selection - 1, true);
-                    Console.WriteLine($"{MaterialChoose()}\nPress \"fin\" for finish");
+                    Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
                     do
                     {
                         answer = Console.ReadLine();
-                        if (Int32.TryParse(answer, out selection) && selection > 0 && selection < AllSources.Count)
+                        if (Int32.TryParse(answer, out selection) && selection > 0 && selection <= AllSources.Count)
                         {
                             if (Source[selection - 1].isUsed)
                             {
@@ -39,11 +40,14 @@ namespace ZooBitSketch
                             }
                             else
                             {
-                                bool success = TryAddAsSource(AllSources[selection - 1]);
+                                bool success = TryAddAsSource(selection - 1);
                                 Source[selection - 1] = (selection - 1, true);
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+                                break;
                             }
                         }
-                    } while (answer != "fin");
+                    } while (answer != "exit");
                 }
                 else
                 {
@@ -52,19 +56,22 @@ namespace ZooBitSketch
                 }
             }
         }
-        public void ChooseActive(T baseActive)
+        public void ChooseActive(int baseActiveIndex)
         {
-            EnhancingActive = baseActive;
+            EnhancingActiveIndex = baseActiveIndex;
         }
         protected virtual void UpgradeActive()
         {
-            EnhancingActive.Evolve();
-            foreach (var Active in EnhancingMaterials)
-                Active.Sacrifice();
+            AllSources[EnhancingActiveIndex].Evolve();
+            EnhancingMaterialsIndexes.Sort();
+            for (int i = EnhancingMaterialsIndexes.Count-1; i >= 0; i--) // delete from the end, because shift would change indexes
+            {
+                AllSources[EnhancingMaterialsIndexes[i]].Sacrifice();
+            }
         }
-        protected virtual bool TryAddAsSource(T material)
+        protected virtual bool TryAddAsSource(int materialIndex)
         {
-            EnhancingMaterials.Add(material);
+            EnhancingMaterialsIndexes.Add(materialIndex);
             return true;
         }
         public virtual void Info()
@@ -72,14 +79,14 @@ namespace ZooBitSketch
             Console.Clear();
             Console.WriteLine($"Welcome to the {this.GetType().ToString().ToLower()}. Select the item you want to upgrade. For exit write \"exit\"");
             PrintList();
-            Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
         }
         protected virtual void PrintList()
         {
             for (int i = 0; i < AllSources.Count; i++)
             {
                 var act = AllSources[i];
-                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness}");
+                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness}", Console.ForegroundColor = act.ChooseColor());
             }
         }
         protected virtual string MaterialChoose()

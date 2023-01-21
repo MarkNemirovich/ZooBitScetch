@@ -13,7 +13,7 @@ namespace ZooBitSketch
         public double Virtuosity { get; private set; }
         public States(Rareness rareness)
         {
-            double multyplayer= 11.0-(double)rareness;
+            double multyplayer= (double)Rareness.Ordinary/(double)rareness;
             Initiative = rand.Next(10,100) * multyplayer;
             Fame = rand.Next(10, 100) * multyplayer;
             Artistry = rand.Next(10, 100) * multyplayer;

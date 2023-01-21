@@ -12,7 +12,7 @@ namespace ZooBitSketch
             Quality = Quality.Bronse;
             _type = type;
         }
-        public override int GetHashCode()
+        sealed public override int GetHashCode()
         {
             byte typeSum = 0;
             byte nameSum = 0;
@@ -21,6 +21,17 @@ namespace ZooBitSketch
             foreach (char letter in Name)
                 nameSum += (byte)letter;
             return (typeSum << 24) | ((byte)Quality << 20) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
+        }
+        sealed public override int CompareTo(Active another)
+        {
+            Card card = another as Card;
+            int first = _type.CompareTo(card._type);
+            if (first != 0) { return first; }
+            first = Rareness.CompareTo(card.Rareness);
+            if (first != 0) { return first; }
+            first = -Quality.CompareTo(card.Quality);
+            if (first != 0) { return first; }
+            else return -States.Power.CompareTo(card.States.Power);
         }
         sealed public override void Evolve()
         {

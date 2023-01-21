@@ -22,7 +22,7 @@ namespace ZooBitSketch
                 $"If you want to know anything about cards, white number. For exit write \"exit.\"\n");
             for (int i = 0; i < Pack.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].States.Power }", Console.ForegroundColor = Pack[i].ChooseColor());
+                Console.WriteLine($"{i + 1} - {Pack[i].Name} {Pack[i].Rareness} {Pack[i].Quality} {Pack[i].States.Power }", Console.ForegroundColor = Pack[i].ChooseColor());
             }
         }
         sealed protected override void Remove(object newItem)

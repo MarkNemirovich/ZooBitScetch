@@ -10,15 +10,15 @@ namespace ZooBitSketch
         {
             return "Choose the card the same quality to upgrade your card";
         }
-        sealed protected override bool TryAddAsSource(Card source)
+        sealed protected override bool TryAddAsSource(int materialIndex)
         {
-            Card target = EnhancingActive as Card;
-            Card material = source as Card;
+            Card material = AllSources[EnhancingActiveIndex] as Card;
+            Card target = AllSources[materialIndex] as Card;
             if (material != null)
             {
-                if (material.Guid == target.Guid)
+                if (material.GetHashCode() == target.GetHashCode() && target.Quality < Quality.Platinum)
                 {
-                    EnhancingMaterials.Add(material);
+                    EnhancingMaterialsIndexes.Add(materialIndex);
                     UpgradeActive();
                     return true;
                 }
@@ -33,10 +33,14 @@ namespace ZooBitSketch
         }
         sealed protected override void PrintList()
         {
+            AllSources.Sort(delegate (Card x, Card y)
+            {
+                return x.CompareTo(y);
+            });
             for (int i = 0; i < AllSources.Count; i++)
             {
-                var act = AllSources[i];
-                Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness} {act.Quality}");
+                var card = AllSources[i];
+                Console.WriteLine($"{i + 1} - {card.Name,-10} {card.Rareness} {card.Quality} {card.States.Power}", Console.ForegroundColor = card.ChooseColor());
             }
         }
     }
