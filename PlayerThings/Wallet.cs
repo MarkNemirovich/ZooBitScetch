@@ -12,7 +12,7 @@ namespace ZooBitSketch
         {
             Money = 1000;
             Diamond = 1000;
-            DNA = 0;
+            DNA = 10;
             Heart = 0;
         }
         public void Info()

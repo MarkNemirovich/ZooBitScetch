@@ -63,7 +63,7 @@ namespace ZooBitSketch
         public virtual void Info()
         {
             Console.Clear();
-            Console.WriteLine($"Welcome to the {this.GetType().ToString().ToLower()}. Select the item you want to upgrade. For exit write \"exit\"");
+            Console.WriteLine($"Welcome to the {this.GetType().ToString().ToLower()}.\nSelect the item you want to upgrade. For exit write \"exit\"");
             PrintList();
             Console.ForegroundColor = ConsoleColor.White;
         }
