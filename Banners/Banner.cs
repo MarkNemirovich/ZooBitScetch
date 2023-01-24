@@ -59,9 +59,8 @@ namespace ZooBitSketch
         }
         public virtual bool TryPurchase(Player customer, Box box)
         {
-            Active[] actives;
             (int price, Currency currency) cost = box.Cost();
-            if (box.TryOpen(customer, out actives))
+            if (box.TryOpen(customer, out Active[] actives))
             {
                 Console.WriteLine($"You get:\n");
                 customer.Wallet.Pay(cost);
