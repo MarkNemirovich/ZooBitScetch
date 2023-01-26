@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ZooBitSketch
 {
@@ -43,7 +42,7 @@ namespace ZooBitSketch
         public virtual void Add(T newItem)
         {
             Pack.Add(newItem);
-            newItem.IWasSacrificed += Remove;
+            newItem.SacrificeMe += Remove;
             Console.WriteLine(newItem.Info());
         }
         protected abstract void Remove(object newItem);

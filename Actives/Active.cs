@@ -10,7 +10,9 @@ namespace ZooBitSketch
         public readonly Rareness Rareness;
         public readonly Role Role;
         public readonly Genre Genre;
-        public event Action<object> IWasSacrificed;
+
+        public event Action<object> SacrificeMe;
+
         protected Active(string name, Rareness rareness, Role role, Genre genre, States states)
         {
             Name = name;
@@ -19,13 +21,6 @@ namespace ZooBitSketch
             Genre = genre;
             States = states;
             Guid = GetHashCode();
-        }
-        public int GetTypeCode(Type t)
-        {
-            byte typeSum = 0;
-            foreach (char letter in t.Name)
-                typeSum += (byte)letter;
-            return typeSum;
         }
         public override int GetHashCode()
         {
@@ -67,9 +62,9 @@ namespace ZooBitSketch
                 $"{States.Info()}";
             return (text);
         }
-        public virtual void Sacrifice()
+        public void Sacrifice()
         {
-            IWasSacrificed?.Invoke((object)this);
+            SacrificeMe?.Invoke((object)this);
         }
     }
 }

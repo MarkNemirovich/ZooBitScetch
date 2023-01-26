@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ZooBitSketch
 {
-    internal class Team<T> : AbstractDeck<Character>
+    internal class Team : AbstractDeck<Character>
     {
         public event Action<Rareness> Decay;
         public Team(int size) : base(size)

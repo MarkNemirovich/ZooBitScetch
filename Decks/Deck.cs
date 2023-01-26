@@ -2,7 +2,7 @@
 
 namespace ZooBitSketch
 {
-    internal class Deck<T> : AbstractDeck<Card>
+    internal class Deck : AbstractDeck<Card>
     {
         public static readonly int BATTLE_LIMIT = 15;
         public Deck(int size) : base(size)
@@ -31,7 +31,7 @@ namespace ZooBitSketch
             Card forRemoving = newItem as Card;
             if (forRemoving != null)
             {
-                forRemoving.IWasSacrificed -= Remove;
+                forRemoving.SacrificeMe -= Remove;
                 Pack.Remove(forRemoving);
                 Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }

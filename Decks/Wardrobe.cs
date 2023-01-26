@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ZooBitSketch
 {
-    internal class Wardrobe<T> : AbstractDeck<Clothes>
+    internal class Wardrobe : AbstractDeck<Clothes>
     {
         public Wardrobe(int size) : base(size)
         {
@@ -31,7 +31,7 @@ namespace ZooBitSketch
             Clothes forRemoving = newItem as Clothes;
             if (forRemoving != null)
             {
-                forRemoving.IWasSacrificed -= Remove;
+                forRemoving.SacrificeMe -= Remove;
                 Pack.Remove(forRemoving);
                 Console.WriteLine(forRemoving.Info() + "\nwas removed");
             }

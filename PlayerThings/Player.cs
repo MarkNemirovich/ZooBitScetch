@@ -9,9 +9,9 @@ namespace ZooBitSketch
         public int Exp { get; private set; }
         public Wallet Wallet { get; private set; }
         public Bag Bag { get; private set; }
-        public Deck<Card> Deck { get; private set; }
-        public Team<Character> Team { get; private set; }
-        public Wardrobe<Clothes> Wardrobe { get; private set; }
+        public Deck Deck { get; private set; }
+        public Team Team { get; private set; }
+        public Wardrobe Wardrobe { get; private set; }
         private int _maxSize;
         public Player(string name)
         {
@@ -21,9 +21,9 @@ namespace ZooBitSketch
             _maxSize = 1000;
             Wallet = new Wallet();
             Bag = new Bag();
-            Deck = new Deck<Card>(_maxSize);
-            Team = new Team<Character>(_maxSize);
-            Wardrobe = new Wardrobe<Clothes>(_maxSize);
+            Deck = new Deck(_maxSize);
+            Team = new Team(_maxSize);
+            Wardrobe = new Wardrobe(_maxSize);
 
             Team.Decay += Wallet.DecayCharacter;
         }

@@ -5,12 +5,8 @@ namespace ZooBitSketch
 {
     internal class Gallery<T> where T : Active
     {
-        protected Random rand = new Random();
-        protected T[] _ordinary;
-        protected T[] _rare;
-        protected T[] _elite;
-        protected T[] _epic;
-        protected T[] _legendary;
+        private Random rand = new Random();
+        protected Dictionary<Rareness,T[]> AllActives;
 
         protected States RandomStates(Rareness rareness)
         {
@@ -23,26 +19,27 @@ namespace ZooBitSketch
                 list.Add(card as Active);
             return list;
         }
-        public T[] CurrentList { get; protected set; }
+        public T[] CurrentPack { get; protected set; }
         public List<Active> FullCardList()
         {
-            List<Active> allCards = UpCast(_ordinary);
-            allCards.AddRange(UpCast(_rare));
-            allCards.AddRange(UpCast(_elite));
-            allCards.AddRange(UpCast(_epic));
-            allCards.AddRange(UpCast(_legendary));
+            List<Active> allCards = new List<Active>();
+            foreach (var active in AllActives)
+            {
+                allCards.AddRange(active.Value);
+            }
             return allCards;
         }
         public T GetCharacter()
         {
-            int number = rand.Next(0, CurrentList.Length);
-            return CurrentList[number];
+            int number = rand.Next(0, CurrentPack.Length);
+            return CurrentPack[number];
         }
         public T[] StartedPack(int size)
         {
+            T[] pack = null;
             if (size == 0)
-                return _ordinary;
-            return null;
+                AllActives.TryGetValue(Rareness.Ordinary, out pack);
+            return pack;
         }
     }
 }

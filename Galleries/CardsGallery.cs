@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZooBitSketch
 {
@@ -61,19 +62,13 @@ namespace ZooBitSketch
         }
         public CardsGallery(Rareness rareness)
         {
-            _ordinary = Ordinary();
-            _rare = Rare();
-            _elite = Elite();
-            _epic = Epic();
-            _legendary = Legendary();
-            switch (rareness)
-            {
-                case Rareness.Ordinary: CurrentList = _ordinary; break;
-                case Rareness.Rare: CurrentList = _rare; break;
-                case Rareness.Elite: CurrentList = _elite; break;
-                case Rareness.Epic: CurrentList = _epic; break;
-                case Rareness.Legendary: CurrentList = _legendary; break;
-            }
+            AllActives.TryAdd(Rareness.Ordinary, Ordinary());
+            AllActives.TryAdd(Rareness.Rare, Rare());
+            AllActives.TryAdd(Rareness.Elite, Elite());
+            AllActives.TryAdd(Rareness.Epic, Epic());
+            AllActives.TryAdd(Rareness.Legendary, Legendary());
+            AllActives.TryGetValue(rareness, out Card[] currentPack);
+            CurrentPack = currentPack;
         }
     }
 }

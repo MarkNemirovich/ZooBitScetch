@@ -9,8 +9,8 @@ namespace ZooBitSketch
     {
         public BoxSize Size { get; private set; }
         public readonly string Name;
-        private int _price;
-        private Currency _currency;
+        private readonly int _price;
+        private readonly Currency _currency;
         protected readonly Random rand = new Random();
         public Box(int price, Currency currency, BoxSize size)
         {
@@ -67,17 +67,17 @@ namespace ZooBitSketch
             if (dice < TypeProbability(typeof(Character).ToString()))
             {
                 var array = new CharactersGallery(rareness);
-                actives = array.CurrentList;
+                actives = array.CurrentPack;
             }
             else if (dice < TypeProbability(typeof(Clothes).ToString()))
             {
                 var array = new ClothesGallery(rareness);
-                actives = array.CurrentList;
+                actives = array.CurrentPack;
             }
             else
             {
                 var array = new CardsGallery(rareness);
-                actives = array.CurrentList;
+                actives = array.CurrentPack;
             }
             return actives;
         }

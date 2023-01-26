@@ -8,7 +8,7 @@ namespace ZooBitSketch
         public int Dust { get; private set; }
         public void Info()
         {
-            Console.WriteLine($"Stone is {Stone}\nPress any key for exit...");
+            Console.WriteLine($"Stone is {Stone}\nDust is {Dust}\nPress any key for exit...");
             Console.ReadKey();
         }
         public void AddSurplusEnhanceMaterial(int material)
