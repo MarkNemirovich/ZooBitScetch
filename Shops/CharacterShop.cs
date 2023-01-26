@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ZooBitSketch
 {
-    internal class CharacterShop<Card> : Shop<Active>
+    internal class CharacterShop : Shop<Active>
     {
         public override string Name { get ; protected set ; }
         public CharacterShop()

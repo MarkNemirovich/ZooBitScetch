@@ -23,7 +23,7 @@ namespace ZooBitSketch
             CardsWorkshop Workshop = new CardsWorkshop(player.Deck.Pack);
             Smithy Smithy = new Smithy(player.Wardrobe.Pack);
             Smithy.EnhenceSurplus += player.Bag.AddSurplusEnhanceMaterial;
-            CharacterShop<Character> Cshop = new CharacterShop<Character>();
+            CharacterShop Cshop = new CharacterShop();
 
             string input;
             do
