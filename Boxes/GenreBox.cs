@@ -34,11 +34,6 @@ namespace ZooBitSketch
             }
             return maxChance / 10;
         }
-        sealed protected override bool CheckMoney(Wallet wallet)
-        {
-            var cost = Cost();
-            return wallet.Diamond >= cost.Item1;
-        }
         sealed protected override Active GetActive(List<Active> actves)
         {
             int length = actves.Count;

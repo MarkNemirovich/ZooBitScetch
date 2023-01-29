@@ -55,7 +55,7 @@ namespace ZooBitSketch
             new Clothes("Coat5", ClothesType.Coat, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary))
             };
         }
-        public ClothesGallery(Rareness rareness)
+        public ClothesGallery(Rareness rareness) : base()
         {
             AllActives.TryAdd(Rareness.Ordinary, Ordinary());
             AllActives.TryAdd(Rareness.Rare, Rare());

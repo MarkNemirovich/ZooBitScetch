@@ -18,7 +18,7 @@ namespace ZooBitSketch
             _copies++;
             if (_copies >= (int)Rareness)
             {
-                UpdateActive();
+                Evolve();
                 _copies = 0;
             }
         }

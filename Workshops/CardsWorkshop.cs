@@ -12,9 +12,9 @@ namespace ZooBitSketch
         }
         sealed protected override bool TryAddAsSource(int materialIndex)
         {
-            if (AllSources.Count <= Deck<Card>.BATTLE_LIMIT)
+            if (AllSources.Count <= Deck.BATTLE_LIMIT)
             {
-                Console.WriteLine($"It is impossible to make merge now.\nYou have to keep at least {Deck<Card>.BATTLE_LIMIT} cards for battle.");
+                Console.WriteLine($"It is impossible to make merge now.\nYou have to keep at least {Deck.BATTLE_LIMIT} cards for battle.");
                 return false;
             }
             Card material = AllSources[EnhancingActiveIndex] as Card;

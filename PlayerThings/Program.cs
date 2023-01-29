@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ZooBitSketch.Player;
 
 namespace ZooBitSketch
 {
@@ -15,7 +16,7 @@ namespace ZooBitSketch
                 name = Console.ReadLine();
             } while (!name.All(char.IsLetter) || name[0] < 'A' || name[0] > 'Z' || name[1..].Any(letter => letter >= 'A' && letter <= 'Z') || name.Length == 0 || name.Length > 16);
 
-            Player player = new Player(name);
+            PlayerEntity player = new PlayerEntity(name);
             CommonBanner Cbanner = new CommonBanner();
             EliteBanner Ebanner = new EliteBanner();
             FriendBanner Fbanner = new FriendBanner();

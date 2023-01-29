@@ -1,4 +1,5 @@
 ﻿using System;
+using ZooBitSketch.Player;
 
 namespace ZooBitSketch
 {
@@ -11,7 +12,7 @@ namespace ZooBitSketch
             Name = this.GetType().Name;
             Boxes = boxes;
         }
-        public void Entry(Player customer)
+        public void Entry(PlayerEntity customer)
         {
             Info();
             string answer;
@@ -57,13 +58,13 @@ namespace ZooBitSketch
                 }
             }
         }
-        public virtual bool TryPurchase(Player customer, Box box)
+        public virtual bool TryPurchase(PlayerEntity customer, Box box)
         {
             (int price, Currency currency) cost = box.Cost();
             if (box.TryOpen(customer, out Active[] actives))
             {
                 Console.WriteLine($"You get:\n");
-                customer.Wallet.Pay(cost);
+                customer.Wallet.Pay(cost.currency, cost.price);
                 FillTheSlots(customer, actives);
                 return true;
             }
@@ -73,7 +74,7 @@ namespace ZooBitSketch
                 return false;
             }
         }
-        private void FillTheSlots(Player customer, Active[] newActives)
+        private void FillTheSlots(PlayerEntity customer, Active[] newActives)
         {
             foreach (Active active in newActives)
             {

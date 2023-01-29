@@ -30,10 +30,5 @@ namespace ZooBitSketch
             }
             return maxChance / 10;
         }
-        sealed protected override bool CheckMoney(Wallet wallet)
-        {
-            var cost = Cost();
-            return wallet.Heart >= cost.Item1;
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ZooBitSketch
+namespace ZooBitSketch.Player
 {
     internal class Bag
     {

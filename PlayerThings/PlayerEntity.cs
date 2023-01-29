@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ZooBitSketch
+namespace ZooBitSketch.Player
 {
-    internal class Player
+    internal class PlayerEntity
     {
         public readonly string Name;
         public int Lvl { get; private set; }
@@ -13,13 +13,13 @@ namespace ZooBitSketch
         public Team Team { get; private set; }
         public Wardrobe Wardrobe { get; private set; }
         private int _maxSize;
-        public Player(string name)
+        public PlayerEntity(string name)
         {
             Name = name;
             Lvl = 1;
             Exp = 0;
             _maxSize = 1000;
-            Wallet = new Wallet();
+            Wallet = Wallet.GetInstance();
             Bag = new Bag();
             Deck = new Deck(_maxSize);
             Team = new Team(_maxSize);

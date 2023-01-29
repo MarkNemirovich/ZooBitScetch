@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ZooBitSketch;
+using ZooBitSketch.Player;
 
 namespace ZooBitSketch
 {
@@ -24,7 +25,7 @@ namespace ZooBitSketch
         {
             return $"\nName = {Name}\nPrice = {_price} {_currency.ToString().ToLower()}\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
         }
-        public bool TryOpen(Player customer, out Active[] actives)
+        public bool TryOpen(PlayerEntity customer, out Active[] actives)
         {
             actives = null;
             if (CheckMoney(customer.Wallet) == false)
@@ -39,7 +40,11 @@ namespace ZooBitSketch
             actives = content.ToArray();
             return true;
         }
-        protected abstract bool CheckMoney(Wallet wallet);
+        private bool CheckMoney(IPayable wallet)
+        {
+            var cost = Cost();
+            return wallet.CheckAmount(cost.Item2) >= cost.Item1;
+        }
         protected abstract double RarenessProbability(Rareness rareness, int playerLvl);
         protected virtual double TypeProbability(string typeName)
         {

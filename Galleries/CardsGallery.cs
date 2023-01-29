@@ -60,7 +60,7 @@ namespace ZooBitSketch
             new Card("Growth5", CardType.Growth, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary))
             };
         }
-        public CardsGallery(Rareness rareness)
+        public CardsGallery(Rareness rareness) : base()
         {
             AllActives.TryAdd(Rareness.Ordinary, Ordinary());
             AllActives.TryAdd(Rareness.Rare, Rare());

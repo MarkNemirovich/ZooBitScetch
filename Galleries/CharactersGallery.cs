@@ -54,7 +54,7 @@ namespace ZooBitSketch
             new Character("Elephant", Phase.Child, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary))
             };
         }
-        public CharactersGallery(Rareness rareness)
+        public CharactersGallery(Rareness rareness) : base()
         {
             AllActives.TryAdd(Rareness.Ordinary, Ordinary());
             AllActives.TryAdd(Rareness.Rare, Rare());

@@ -7,6 +7,10 @@ namespace ZooBitSketch
     {
         private Random rand = new Random();
         protected Dictionary<Rareness,T[]> AllActives;
+        protected Gallery()
+        {
+            AllActives = new Dictionary<Rareness, T[]>();
+        }
 
         protected States RandomStates(Rareness rareness)
         {

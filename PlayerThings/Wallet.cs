@@ -1,37 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ZooBitSketch
+namespace ZooBitSketch.Player
 {
-    internal class Wallet
+    internal class Wallet : IPayable
     {
-        public int Money { get; private set; }
-        public int Diamond { get; private set; }
-        public int DNA { get; private set; }
-        public int Heart { get; private set; }
-        public Wallet()
+        private static readonly Lazy<Wallet> lazy = new Lazy<Wallet>(() => new Wallet());
+        private Dictionary<Currency, int> Cash;
+        private Wallet()
         {
-            Money = 1000;
-            Diamond = 1000;
-            DNA = 10;
-            Heart = 0;
+            Cash = new Dictionary<Currency, int>();
+            Cash.TryAdd(Currency.Money, 1000);
+            Cash.TryAdd(Currency.Diamonds, 1000);
+            Cash.TryAdd(Currency.DNA, 1000);
+            Cash.TryAdd(Currency.Heart, 1000);
+        }
+        public static Wallet GetInstance()
+        {
+            return lazy.Value;
         }
         public void Info()
         {
-            Console.WriteLine($"Money = {Money}\nDiamonds = {Diamond}\nDNA = {DNA}\nHeart = {Heart}\nPress any key for continue...");
+            string data = string.Empty;
+            foreach (var pair in Cash)
+            {
+                data += $"{pair.Key.ToString()} = {pair.Value}\n";
+            }
+            Console.WriteLine($"{data}Press any key for continue...");
             Console.ReadKey();
         }
-        public void Pay((int cost, Currency currency) pay)
+        public int CheckAmount(Currency currency)
         {
-            switch (pay.currency)
+            Cash.TryGetValue(currency, out int amount);
+            return amount;
+        }
+        public bool Pay(Currency currency, int cost)
+        {
+            if(Cash.TryGetValue(currency, out int cashAmount))
             {
-                case Currency.Money: Money -= pay.cost; break;
-                case Currency.Diamonds: Diamond -= pay.cost; break;
-                case Currency.DNA: DNA -= pay.cost; break;
+                if (cashAmount >= cost)
+                {
+                    Cash[currency] -= cost;
+                    return true;
+                }
             }
+            return false;
         }
         public void DecayCharacter(Rareness rareness)
         {
-            DNA += (int)Rareness.Ordinary / (int)rareness;
+            if (Cash.TryGetValue(Currency.DNA, out int DNAAmount))
+                Cash[Currency.DNA] += (int)Rareness.Ordinary / (int)rareness;
         }
     }
 }

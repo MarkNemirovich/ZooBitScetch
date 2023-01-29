@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ZooBitSketch.Player;
 
 namespace ZooBitSketch
 {
@@ -7,7 +8,7 @@ namespace ZooBitSketch
     {
         public abstract string Name { get; protected set; }
         public List<(T active, int price, Currency currency)> Actives { get; protected set; }
-        public void Entry(Player customer)
+        public void Entry(PlayerEntity customer)
         {
             Info();
             string answer;
@@ -16,27 +17,15 @@ namespace ZooBitSketch
                 answer = Console.ReadLine();
                 if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= Actives.Count)
                 {
-                    var selectedActive = Actives[selection - 1];              
-                    switch (selectedActive.currency)
+                    var selectedActive = Actives[selection - 1];
+                    if (customer.Wallet.Pay(selectedActive.currency, selectedActive.price))
                     {
-                        case Currency.Money:
-                            break;
-                        case Currency.Diamonds:
-                            break;
-                        case Currency.DNA:
-                            if (selectedActive.price <= customer.Wallet.DNA)
-                            {
-                                Purchase(customer, selectedActive.active);
-                                customer.Wallet.Pay((selectedActive.price, selectedActive.currency));
-                                Actives.RemoveAt(selection - 1);
-                                Info();
-                            }
-                            else
-                                Console.WriteLine($"You have not enough {selectedActive.currency}");
-                            break;
-                        case Currency.Heart:
-                            break;
+                        FillThePack(customer, selectedActive.active);
+                        Actives.RemoveAt(selection - 1);
+                        Info();
                     }
+                    else
+                        Console.WriteLine($"You have not enough {selectedActive.currency}");
                 }
                 else
                 {
@@ -45,7 +34,7 @@ namespace ZooBitSketch
                 Console.ReadLine();
             } while (answer != "exit");
         }
-        protected virtual void Purchase(Player customer, T active)
+        protected virtual void FillThePack(PlayerEntity customer, T active)
         {
             var a = active;
             switch (a)
