@@ -9,4 +9,9 @@ namespace ZooBitSketch
         DNA,
         Heart
     }
+    enum Resources
+    {
+        Stone,
+        Dust
+    }
 }

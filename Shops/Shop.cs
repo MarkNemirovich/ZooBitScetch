@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ZooBitSketch.Player;
+using ZooBitSketch.PlayerThings;
 
 namespace ZooBitSketch
 {
@@ -8,7 +9,7 @@ namespace ZooBitSketch
     {
         public abstract string Name { get; protected set; }
         public List<(T active, int price, Currency currency)> Actives { get; protected set; }
-        public void Entry(PlayerEntity customer)
+        public void Entry(ICustomer customer)
         {
             Info();
             string answer;
@@ -17,38 +18,25 @@ namespace ZooBitSketch
                 answer = Console.ReadLine();
                 if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= Actives.Count)
                 {
-                    var selectedActive = Actives[selection - 1];
-                    if (customer.Wallet.Pay(selectedActive.currency, selectedActive.price))
-                    {
-                        FillThePack(customer, selectedActive.active);
-                        Actives.RemoveAt(selection - 1);
-                        Info();
-                    }
-                    else
-                        Console.WriteLine($"You have not enough {selectedActive.currency}");
+                    Purchase(customer, selection - 1);
                 }
                 else
                 {
                     Console.WriteLine("No active with such number. Try again");
                 }
-                Console.ReadLine();
             } while (answer != "exit");
         }
-        protected virtual void FillThePack(PlayerEntity customer, T active)
-        {
-            var a = active;
-            switch (a)
+        private void Purchase(ICustomer customer, int index)
             {
-                case Character:
-                    customer.Team.Add(a as Character);
-                    break;
-                case Clothes:
-                    customer.Wardrobe.Add(a as Clothes);
-                    break;
-                case Card:
-                    customer.Deck.Add(a as Card);
-                    break;
+            var selectedActive = Actives[index];
+            if (customer.Purchase(selectedActive.currency, selectedActive.price))
+            {
+                customer.AddActive(selectedActive.active);
+                Actives.RemoveAt(index);
+                Info();
             }
+            else
+                Console.WriteLine($"You have not enough {selectedActive.currency}");
         }
         protected virtual void Info()
         {

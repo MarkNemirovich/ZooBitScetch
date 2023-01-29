@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ZooBitSketch;
 using ZooBitSketch.Player;
+using ZooBitSketch.PlayerThings;
 
 namespace ZooBitSketch
 {
@@ -25,25 +26,22 @@ namespace ZooBitSketch
         {
             return $"\nName = {Name}\nPrice = {_price} {_currency.ToString().ToLower()}\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
         }
-        public bool TryOpen(PlayerEntity customer, out Active[] actives)
+        public bool TryOpen(ICustomer customer, out Active[] actives)
         {
             actives = null;
-            if (CheckMoney(customer.Wallet) == false)
-                return false;
-            List<Active> content = new List<Active>();
-            for (int i = 0; i < (int)Size; i++)
+            if (customer.Purchase(_currency, _price))
             {
-                Rareness rareness = GetRareness(customer.Lvl);
-                Active[] array = GetActiveArray(rareness);
-                content.Add(GetActive(array.ToList()));
+                List<Active> content = new List<Active>();
+                for (int i = 0; i < (int)Size; i++)
+                {
+                    Rareness rareness = GetRareness(customer.GetLvl);
+                    Active[] array = GetActiveArray(rareness);
+                    content.Add(GetActive(array.ToList()));
+                }
+                actives = content.ToArray();
+                return true;
             }
-            actives = content.ToArray();
-            return true;
-        }
-        private bool CheckMoney(IPayable wallet)
-        {
-            var cost = Cost();
-            return wallet.CheckAmount(cost.Item2) >= cost.Item1;
+            return false;
         }
         protected abstract double RarenessProbability(Rareness rareness, int playerLvl);
         protected virtual double TypeProbability(string typeName)

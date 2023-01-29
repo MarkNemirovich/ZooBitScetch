@@ -1,5 +1,6 @@
 ﻿using System;
 using ZooBitSketch.Player;
+using ZooBitSketch.PlayerThings;
 
 namespace ZooBitSketch
 {
@@ -41,7 +42,7 @@ namespace ZooBitSketch
                                 TryPurchase(customer, Boxes[selection-1]);
                                 break;
                             case 2:
-                                Console.WriteLine(Boxes[selection - 1].Info(customer.Lvl));
+                                Console.WriteLine(Boxes[selection - 1].Info(customer.GetLvl));
                                 break;
                             default:
                                 Console.WriteLine("No such command\nPress any key for continue...");
@@ -58,13 +59,12 @@ namespace ZooBitSketch
                 }
             }
         }
-        public virtual bool TryPurchase(PlayerEntity customer, Box box)
+        public virtual bool TryPurchase(ICustomer customer, Box box)
         {
             (int price, Currency currency) cost = box.Cost();
             if (box.TryOpen(customer, out Active[] actives))
             {
                 Console.WriteLine($"You get:\n");
-                customer.Wallet.Pay(cost.currency, cost.price);
                 FillTheSlots(customer, actives);
                 return true;
             }
@@ -74,25 +74,11 @@ namespace ZooBitSketch
                 return false;
             }
         }
-        private void FillTheSlots(PlayerEntity customer, Active[] newActives)
+        private void FillTheSlots(ICustomer customer, Active[] newActives)
         {
             foreach (Active active in newActives)
             {
-                if (active is Card)
-                {
-                    customer.Deck.Add((Card)active);
-                    continue;
-                }
-                if (active is Character)
-                {
-                    customer.Team.Add((Character)active);
-                    continue;
-                }
-                if (active is Clothes)
-                {
-                    customer.Wardrobe.Add((Clothes)active);
-                    continue;
-                }
+                customer.AddActive(active);
             }
         }
         private void Description()
