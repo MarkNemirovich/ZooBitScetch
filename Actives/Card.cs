@@ -4,13 +4,13 @@ namespace ZooBitSketch
 {
     internal class Card : Active
     {
-        private readonly CardType _type;
+        private readonly CardType type;
         public Quality Quality { get; private set; }
         public Card(string name, CardType type, Rareness rareness, Role role, Genre genre, States states)
             : base(name, rareness, role, genre, states)
         {
             Quality = Quality.Bronse;
-            _type = type;
+            this.type = type;
         }
         sealed public override int GetHashCode()
         {
@@ -25,7 +25,7 @@ namespace ZooBitSketch
         sealed public override int CompareTo(Active another)
         {
             Card card = another as Card;
-            int first = _type.CompareTo(card._type);
+            int first = type.CompareTo(card.type);
             if (first != 0) { return first; }
             first = Rareness.CompareTo(card.Rareness);
             if (first != 0) { return first; }

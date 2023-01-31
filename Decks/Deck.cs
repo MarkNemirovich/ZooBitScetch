@@ -4,10 +4,8 @@ namespace ZooBitSketch
 {
     internal class Deck : AbstractDeck<Card>
     {
-        public static readonly int BATTLE_LIMIT = 15;
-        public Deck(int size) : base(size)
-        {
-        }
+        public static readonly int MIN_BATTLE_LIMIT = 15;
+        public Deck(int size) : base(size) { }
         sealed public override void Info()
         {
             Pack.Sort(delegate (Card x, Card y)

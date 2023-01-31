@@ -6,14 +6,14 @@ namespace ZooBitSketch.Player
     internal class Wallet : IPayable
     {
         private static readonly Lazy<Wallet> lazy = new Lazy<Wallet>(() => new Wallet());
-        private Dictionary<Currency, int> Cash;
+        private Dictionary<Currency, int> cash;
         private Wallet()
         {
-            Cash = new Dictionary<Currency, int>();
-            Cash.TryAdd(Currency.Money, 1000);
-            Cash.TryAdd(Currency.Diamonds, 1000);
-            Cash.TryAdd(Currency.DNA, 1000);
-            Cash.TryAdd(Currency.Heart, 1000);
+            cash = new Dictionary<Currency, int>();
+            cash.TryAdd(Currency.Money, 1000);
+            cash.TryAdd(Currency.Diamonds, 1000);
+            cash.TryAdd(Currency.DNA, 1000);
+            cash.TryAdd(Currency.Heart, 1000);
         }
         public static Wallet GetInstance()
         {
@@ -22,7 +22,7 @@ namespace ZooBitSketch.Player
         public void Info()
         {
             string data = string.Empty;
-            foreach (var pair in Cash)
+            foreach (var pair in cash)
             {
                 data += $"{pair.Key.ToString()} = {pair.Value}\n";
             }
@@ -31,16 +31,16 @@ namespace ZooBitSketch.Player
         }
         public int CheckAmount(Currency currency)
         {
-            Cash.TryGetValue(currency, out int amount);
+            cash.TryGetValue(currency, out int amount);
             return amount;
         }
         public bool Pay(Currency currency, int cost)
         {
-            if(Cash.TryGetValue(currency, out int cashAmount))
+            if(cash.TryGetValue(currency, out int cashAmount))
             {
                 if (cashAmount >= cost)
                 {
-                    Cash[currency] -= cost;
+                    cash[currency] -= cost;
                     return true;
                 }
             }
@@ -48,8 +48,8 @@ namespace ZooBitSketch.Player
         }
         public void DecayCharacter(Rareness rareness)
         {
-            if (Cash.TryGetValue(Currency.DNA, out int DNAAmount))
-                Cash[Currency.DNA] += (int)Rareness.Ordinary / (int)rareness;
+            if (cash.TryGetValue(Currency.DNA, out int DNAAmount))
+                cash[Currency.DNA] += (int)Rareness.Ordinary / (int)rareness;
         }
     }
 }

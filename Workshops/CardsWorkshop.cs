@@ -12,13 +12,13 @@ namespace ZooBitSketch
         }
         sealed protected override bool TryAddAsSource(int materialIndex)
         {
-            if (AllSources.Count <= Deck.BATTLE_LIMIT)
+            if (allSources.Count <= Deck.MIN_BATTLE_LIMIT)
             {
-                Console.WriteLine($"It is impossible to make merge now.\nYou have to keep at least {Deck.BATTLE_LIMIT} cards for battle.");
+                Console.WriteLine($"It is impossible to make merge now.\nYou have to keep at least {Deck.MIN_BATTLE_LIMIT} cards for battle.");
                 return false;
             }
-            Card material = AllSources[EnhancingActiveIndex] as Card;
-            Card target = AllSources[materialIndex] as Card;
+            Card material = allSources[EnhancingActiveIndex] as Card;
+            Card target = allSources[materialIndex] as Card;
             if (material != null)
             {
                 if (material.GetHashCode() == target.GetHashCode() && target.Quality < Quality.Platinum)
@@ -42,9 +42,9 @@ namespace ZooBitSketch
             do
             {
                 answer = Console.ReadLine();
-                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= AllSources.Count)
+                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= allSources.Count)
                 {
-                    if (Source[selection - 1].isUsed)
+                    if (source[selection - 1].isUsed)
                     {
                         Console.WriteLine("This active already choosen, try another one");
                         continue;
@@ -52,7 +52,7 @@ namespace ZooBitSketch
                     else
                     {
                         bool success = TryAddAsSource(selection - 1);
-                        Source[selection - 1] = (selection - 1, success);
+                        source[selection - 1] = (selection - 1, success);
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
@@ -62,13 +62,13 @@ namespace ZooBitSketch
         }
         sealed protected override void PrintList()
         {
-            AllSources.Sort(delegate (Card x, Card y)
+            allSources.Sort(delegate (Card x, Card y)
             {
                 return x.CompareTo(y);
             });
-            for (int i = 0; i < AllSources.Count; i++)
+            for (int i = 0; i < allSources.Count; i++)
             {
-                var card = AllSources[i];
+                var card = allSources[i];
                 Console.WriteLine($"{i + 1} - {card.Name,-10} {card.Rareness} {card.Quality} {card.States.Power}", Console.ForegroundColor = card.ChooseColor());
             }
         }

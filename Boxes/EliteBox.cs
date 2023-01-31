@@ -4,9 +4,7 @@ namespace ZooBitSketch
 {
     internal class EliteBox : Box
     {
-        public EliteBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size)
-        {
-        }
+        public EliteBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size) { }
         sealed protected override double RarenessProbability(Rareness rareness, int playerLvl)
         {
             double maxChance = 0;

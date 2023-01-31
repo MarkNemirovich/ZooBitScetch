@@ -6,10 +6,10 @@ namespace ZooBitSketch
     internal class Gallery<T> where T : Active
     {
         private Random rand = new Random();
-        protected Dictionary<Rareness,T[]> AllActives;
+        protected Dictionary<Rareness,T[]> allActives;
         protected Gallery()
         {
-            AllActives = new Dictionary<Rareness, T[]>();
+            allActives = new Dictionary<Rareness, T[]>();
         }
 
         protected States RandomStates(Rareness rareness)
@@ -27,7 +27,7 @@ namespace ZooBitSketch
         public List<Active> FullCardList()
         {
             List<Active> allCards = new List<Active>();
-            foreach (var active in AllActives)
+            foreach (var active in allActives)
             {
                 allCards.AddRange(active.Value);
             }
@@ -42,7 +42,7 @@ namespace ZooBitSketch
         {
             T[] pack = null;
             if (size == 0)
-                AllActives.TryGetValue(Rareness.Ordinary, out pack);
+                allActives.TryGetValue(Rareness.Ordinary, out pack);
             return pack;
         }
     }

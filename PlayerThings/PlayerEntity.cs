@@ -6,7 +6,7 @@ namespace ZooBitSketch.Player
     internal class PlayerEntity : ICustomer
     {
         public readonly string Name;
-        private int _lvl;
+        private int lvl;
         public int Exp { get; private set; }
         public Wallet Wallet { get; private set; }
         public Bag Bag { get; private set; }
@@ -17,7 +17,7 @@ namespace ZooBitSketch.Player
         public PlayerEntity(string name)
         {
             Name = name;
-            _lvl = 1;
+            lvl = 1;
             Exp = 0;
             _maxSize = 1000;
             Wallet = Wallet.GetInstance();
@@ -31,22 +31,22 @@ namespace ZooBitSketch.Player
         public void AddExp(int exp)
         {
             Exp += exp;
-            if (Exp > _lvl * 100)
+            if (Exp > lvl * 100)
                 LvlUP();
         }
         private void LvlUP()
         {
-            Exp -= _lvl * 100;
-            _lvl++;
-            if (_lvl % 5 == 0)
+            Exp -= lvl * 100;
+            lvl++;
+            if (lvl % 5 == 0)
                 _maxSize++;
         }
         public void Info()
         {
-            Console.WriteLine($"\nName = {Name}\nLvl = {_lvl}\n\nPress any key for continue...");
+            Console.WriteLine($"\nName = {Name}\nLvl = {lvl}\n\nPress any key for continue...");
             Console.ReadKey();
         }
-        public int GetLvl => _lvl;
+        public int GetLvl => lvl;
         public bool Purchase(Currency currency, int cost) => Wallet.GetInstance().Pay(currency, cost);
         public void AddActive(Active active)
         {

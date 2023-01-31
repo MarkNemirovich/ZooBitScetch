@@ -7,15 +7,14 @@ namespace ZooBitSketch
     internal abstract class Workshop<T> where T : Active
     {
         public readonly string Name;
-        protected List<T> AllSources;
-        protected (int indexInThePack, bool isUsed)[] Source;
         public int EnhancingActiveIndex { get; protected set; }
         public List<int> EnhancingMaterialsIndexes { get; protected set; }
+        protected List<T> allSources;
+        protected (int indexInThePack, bool isUsed)[] source;
         public Workshop(List<T> pack)
         {
-            AllSources = pack;
+            allSources = pack;
         }
-
         public void Enhance()
         {
             string answer;
@@ -23,15 +22,15 @@ namespace ZooBitSketch
             {
                 Info();
                 EnhancingMaterialsIndexes = new List<int>();
-                Source = new (int, bool)[AllSources.Count];
+                source = new (int, bool)[allSources.Count];
                 answer = Console.ReadLine();
                 if (answer == "exit")
                     break;
-                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= AllSources.Count)
+                if (Int32.TryParse(answer, out int selection) && selection > 0 && selection <= allSources.Count)
                 {
                     if (ChooseActive(selection - 1))
                     {
-                        Source[selection - 1] = (selection - 1, true);
+                        source[selection - 1] = (selection - 1, true);
                         Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
                         TryChooseSources();
                     }
@@ -51,11 +50,11 @@ namespace ZooBitSketch
         protected abstract void TryChooseSources();
         protected virtual void UpgradeActive()
         {
-            AllSources[EnhancingActiveIndex].Evolve();
+            allSources[EnhancingActiveIndex].Evolve();
             EnhancingMaterialsIndexes.Sort();
             for (int i = EnhancingMaterialsIndexes.Count-1; i >= 0; i--) // delete from the end, because shift would change indexes
             {
-                AllSources[EnhancingMaterialsIndexes[i]].Sacrifice();
+                allSources[EnhancingMaterialsIndexes[i]].Sacrifice();
             }
         }
         protected virtual bool TryAddAsSource(int materialIndex)
@@ -72,9 +71,9 @@ namespace ZooBitSketch
         }
         protected virtual void PrintList()
         {
-            for (int i = 0; i < AllSources.Count; i++)
+            for (int i = 0; i < allSources.Count; i++)
             {
-                var act = AllSources[i];
+                var act = allSources[i];
                 Console.WriteLine($"{i + 1} - {act.Name,-10} {act.Rareness} {act.States.Power,-10}", Console.ForegroundColor = act.ChooseColor());
             }
         }

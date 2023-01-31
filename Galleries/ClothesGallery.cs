@@ -57,12 +57,12 @@ namespace ZooBitSketch
         }
         public ClothesGallery(Rareness rareness) : base()
         {
-            AllActives.TryAdd(Rareness.Ordinary, Ordinary());
-            AllActives.TryAdd(Rareness.Rare, Rare());
-            AllActives.TryAdd(Rareness.Elite, Elite());
-            AllActives.TryAdd(Rareness.Epic, Epic());
-            AllActives.TryAdd(Rareness.Legendary, Legendary());
-            AllActives.TryGetValue(rareness, out Clothes[] currentPack);
+            allActives.TryAdd(Rareness.Ordinary, Ordinary());
+            allActives.TryAdd(Rareness.Rare, Rare());
+            allActives.TryAdd(Rareness.Elite, Elite());
+            allActives.TryAdd(Rareness.Epic, Epic());
+            allActives.TryAdd(Rareness.Legendary, Legendary());
+            allActives.TryGetValue(rareness, out Clothes[] currentPack);
             CurrentPack = currentPack;
         }
     }

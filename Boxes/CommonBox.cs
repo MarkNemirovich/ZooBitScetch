@@ -4,9 +4,7 @@ namespace ZooBitSketch
 {
     internal class CommonBox : Box
     {
-        public CommonBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size)
-        {
-        }
+        public CommonBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size) { }
         protected override double RarenessProbability(Rareness rareness, int playerLvl)
         {
             double maxChance = 0;

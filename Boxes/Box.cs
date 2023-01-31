@@ -11,25 +11,25 @@ namespace ZooBitSketch
     {
         public BoxSize Size { get; private set; }
         public readonly string Name;
-        private readonly int _price;
-        private readonly Currency _currency;
+        private readonly int price;
+        private readonly Currency currency;
         protected readonly Random rand = new Random();
         public Box(int price, Currency currency, BoxSize size)
         {
-            _price = price;
-            _currency = currency;
+            this.price = price;
+            this.currency = currency;
             Size = size;
             Name = $"{size} {currency} box";
         }
-        public (int, Currency) Cost() => (_price, _currency);
+        public (int, Currency) Cost() => (price, currency);
         public string Info(int playerLvl)
         {
-            return $"\nName = {Name}\nPrice = {_price} {_currency.ToString().ToLower()}\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
+            return $"\nName = {Name}\nPrice = {price} {currency.ToString().ToLower()}\nCards inside = {(int)Size}\n{ChancesDescription(playerLvl)}\n";
         }
         public bool TryOpen(ICustomer customer, out Active[] actives)
         {
             actives = null;
-            if (customer.Purchase(_currency, _price))
+            if (customer.Purchase(currency, price))
             {
                 List<Active> content = new List<Active>();
                 for (int i = 0; i < (int)Size; i++)

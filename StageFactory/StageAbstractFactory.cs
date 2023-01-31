@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZooBitSketch.Enums;
 
 namespace ZooBitSketch
 {
     internal abstract class StageAbstractFactory
     {
+        protected int stagesAmount = 5;
+        protected int euphoriaAmoount = 100;
+        protected int teamSize = 4;
+        protected int deckSize = 30;
+        public Stage[] CreateStages()
+        {
+            var stages = new Stage[stagesAmount];
+            for (int i = 0; i < 2 * stagesAmount; i++)
+                stages[i] = CreateStage(i);
+            return stages;
+        }
         public abstract Stage CreateStage(int stageIndex);
         #region ThreeComboRoleRestrictions
         protected bool SinglerSinglerGuitarRoleRestriction(HashSet<Role> roles)
@@ -207,7 +219,7 @@ namespace ZooBitSketch
         {
             return roles.IsSupersetOf(restrictions);
         }
-        protected bool NoCondition(Condition condition)
+        protected bool NoCondition((Conditions type, int value) condition)
         {
             return true;
         }

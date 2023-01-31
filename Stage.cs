@@ -10,21 +10,27 @@ namespace ZooBitSketch
     {
         private const int CARDS_LIMIT = 15;
         public readonly string Name;
+        public int TeamSize { get; private set; }
+        public int DeckSize { get; private set; }
         public int Stars { get; private set; }
+        public int EuphoriaAmount { get; private set; }
         public Genre benefitGenre;
         public Genre adverseGenre;
         private bool isAvaliable;
-        public Predicate<HashSet<Role>> restrictedTerm { get; private set; }
-        public Predicate<Condition> bonusTerm { get; private set; }
+        public Predicate<HashSet<Role>> RestrictedTerm { get; private set; }
+        public Predicate<(Conditions, int)> BonusTerm { get; private set; }
 
-        public Stage(string name, Genre benefit, Genre adverse, Predicate<HashSet<Role>> restricted, Predicate<Condition> bonus)
+        public Stage(string name, int teamSize, int deckSize, int euphoriaAmount, Genre benefit, Genre adverse, Predicate<HashSet<Role>> restricted, Predicate<(Conditions, int)> bonus)
         {
             Name = name;
+            TeamSize = teamSize;
+            DeckSize = deckSize;
             Stars = 0;
+            EuphoriaAmount = euphoriaAmount;
             benefitGenre = benefit;
             adverseGenre = adverse;
-            restrictedTerm = restricted;
-            bonusTerm = bonus;
+            RestrictedTerm = restricted;
+            BonusTerm = bonus;
         }
         public void ChangeEnableMode(Terms term)
         {

@@ -7,8 +7,12 @@ namespace ZooBitSketch
 {
     internal abstract class Shop<T> where T : Active
     {
-        public abstract string Name { get; protected set; }
+        public virtual string Name { get; protected set; }
         public List<(T active, int price, Currency currency)> Actives { get; protected set; }
+        public Shop()
+        {
+            Name = this.GetType().ToString();
+        }
         public void Entry(ICustomer customer)
         {
             Info();

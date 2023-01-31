@@ -4,9 +4,7 @@ namespace ZooBitSketch
 {
     internal class FriendBox : Box
     {
-        public FriendBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size)
-        {
-        }
+        public FriendBox(int cost, Currency currency, BoxSize size) : base(cost, currency, size) { }
         protected override double RarenessProbability(Rareness rareness, int playerLvl)
         {
             double maxChance = 0;

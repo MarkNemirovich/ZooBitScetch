@@ -8,13 +8,17 @@ namespace ZooBitSketch
     {
         public readonly string Name;
         public Stage[] Stages { get; private set; }
-        private int currentStageIndex;
         public Stage CurrentChapter => Stages[currentStageIndex];
+        private int currentStageIndex;
+        private int starsCurrentAmount;
+        private int starsMaxAmount;
         public Chapter(string name, Stage[] stages)
         {
             Name = name;
             Stages = stages;
             currentStageIndex = -1;
+            starsCurrentAmount = 0;
+            starsMaxAmount = stages.Length*3;
         }
     }
 }

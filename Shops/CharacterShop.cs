@@ -5,10 +5,8 @@ namespace ZooBitSketch
 {
     internal class CharacterShop : Shop<Active>
     {
-        public override string Name { get ; protected set ; }
-        public CharacterShop()
+        public CharacterShop() : base()
         {
-            Name = this.GetType().ToString();
             var eliteCharacters = new CharactersGallery(Rareness.Elite);
             var epicCharacters = new CharactersGallery(Rareness.Epic);
             var elite1 = eliteCharacters.CurrentPack[0];

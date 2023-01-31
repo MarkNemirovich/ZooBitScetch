@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZooBitSketch.Enums;
 
 namespace ZooBitSketch.StageFactory
 {
@@ -8,53 +9,33 @@ namespace ZooBitSketch.StageFactory
     {
         public override Stage CreateStage(int stageIndex)
         {
-            string name = string.Empty;
             switch (stageIndex)
             {
                 case 0:
                     {
-                        return new Stage("Основа боя",
-                            Genre.Universal,
-                            Genre.Universal,
-                            NoRoleRestriction,
-                            NoCondition
-                            );
+                        teamSize = 1; deckSize= 9;
+                        return new Stage("Механика боя", teamSize, deckSize, euphoriaAmoount, Genre.Universal, Genre.Universal, NoRoleRestriction, NoCondition );
                     }
                 case 1:
                     {
-                        return new Stage("Атака и защита",
-                            Genre.Universal,
-                            Genre.Universal,
-                            NoRoleRestriction,
-                            NoCondition
-                            );
+                        teamSize = 1; deckSize = 15;
+                        return new Stage("Атака, защита, сброс", teamSize, deckSize, euphoriaAmoount, Genre.Universal, Genre.Universal, NoRoleRestriction, NoCondition);
                     }
                 case 2:
                     {
-                        return new Stage("Синергия режима",
-                            Genre.Rock,
-                            Genre.Pop,
-                            NoRoleRestriction,
-                            NoCondition
-                            );
+                        teamSize = 2; deckSize = 15;
+                        return new Stage("Синергия режима", teamSize, deckSize, euphoriaAmoount, Genre.Rock, Genre.Universal, NoRoleRestriction, NoCondition);
                     }
                 case 3:
                     {
-                        return new Stage("Бафы",
-                            Genre.Rock,
-                            Genre.Pop,
-                            NoRoleRestriction,
-                            NoCondition
-                            );
+                        teamSize = 3; deckSize = 21;
+                        return new Stage("Продолжительные эффекты", teamSize, deckSize, euphoriaAmoount, Genre.Rock, Genre.Universal, NoRoleRestriction, NoCondition);
                     }
                 case 4:
                     {
-                        return new Stage("Условные ограничения",
-                            Genre.Reggae,
-                            Genre.Universal,
-                            OneSinglerRoleRestriction,
-                            NoCondition
-                            );
+                        teamSize = 4; deckSize = 21;
+                        return new Stage("Условные ограничения", teamSize, deckSize, euphoriaAmoount, Genre.Rock, Genre.Universal, OneSinglerRoleRestriction,
+                            (condition) => (condition.Item1 == Conditions.Rounds && (int)condition.Item2 < 5));
                     }
                 default: { return default; }
             }
