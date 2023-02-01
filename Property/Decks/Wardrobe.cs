@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Clothes;
 
 namespace ZooBitSketch.Property.Decks
 {

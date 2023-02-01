@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ZooBitSketch.Enums;
 using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Cards;
 
 namespace ZooBitSketch.Property.Galleries
 {
@@ -11,55 +12,55 @@ namespace ZooBitSketch.Property.Galleries
         {
             return new Card[]
             {
-            new Card("Atack1", CardType.Atack, Rareness.Ordinary, Role.Singler,Genre.Rap, RandomStates(Rareness.Ordinary)),
-            new Card("Buff1", CardType.Buff, Rareness.Ordinary, Role.Drums,Genre.Rock, RandomStates(Rareness.Ordinary)),
-            new Card("Bonus1", CardType.Bonus, Rareness.Ordinary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Ordinary)),
-            new Card("Defence1", CardType.Defence, Rareness.Ordinary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Ordinary)),
-            new Card("Growth1", CardType.Growth, Rareness.Ordinary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Ordinary))
+            new AtackCard("Atack1", Rareness.Ordinary, Role.Singler,Genre.Rap, RandomStates(Rareness.Ordinary)),
+            new BuffCard("Buff1", Rareness.Ordinary, Role.Drums,Genre.Rock, RandomStates(Rareness.Ordinary)),
+            new BonusCard("Bonus1", Rareness.Ordinary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Ordinary)),
+            new DefenceCard ("Defence1", Rareness.Ordinary, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Ordinary)),
+            new GrowthCard("Growth1", Rareness.Ordinary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Ordinary))
             };
         }
         private Card[] Rare()
         {
             return new Card[]
             {
-            new Card("Atack2", CardType.Atack, Rareness.Rare, Role.Singler,Genre.Rap, RandomStates(Rareness.Rare)),
-            new Card("Instrument2", CardType.Buff, Rareness.Rare, Role.Drums,Genre.Rock, RandomStates(Rareness.Rare)),
-            new Card("Bonus2", CardType.Bonus, Rareness.Rare, Role.Guitar,Genre.Pop, RandomStates(Rareness.Rare)),
-            new Card("Defence2", CardType.Defence, Rareness.Rare, Role.Guitar,Genre.Pop, RandomStates(Rareness.Rare)),
-            new Card("Growth2", CardType.Growth, Rareness.Rare, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Rare))
+            new AtackCard ("Atack2", Rareness.Rare, Role.Singler, Genre.Rap, RandomStates(Rareness.Rare)),
+            new BuffCard("Buff2", Rareness.Rare, Role.Drums,Genre.Rock, RandomStates(Rareness.Rare)),
+            new BonusCard("Bonus2", Rareness.Rare, Role.Guitar,Genre.Pop, RandomStates(Rareness.Rare)),
+            new DefenceCard ("Defence2", Rareness.Rare, Role.Guitar, Genre.Pop, RandomStates(Rareness.Rare)),
+            new GrowthCard("Growth2", Rareness.Rare, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Rare))
          };
         }
         private Card[] Elite()
         {
             return new Card[]
             {
-            new Card("Atack3", CardType.Atack, Rareness.Elite, Role.Singler,Genre.Rap, RandomStates(Rareness.Elite)),
-            new Card("Buff3", CardType.Buff, Rareness.Elite, Role.Drums,Genre.Rock, RandomStates(Rareness.Elite)),
-            new Card("Bonus3", CardType.Bonus, Rareness.Elite, Role.Guitar,Genre.Pop, RandomStates(Rareness.Elite)),
-            new Card("Defence3", CardType.Defence, Rareness.Elite, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Elite)),
-            new Card("Growth3", CardType.Growth, Rareness.Elite, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Elite))
+            new AtackCard ("Atack3", Rareness.Elite, Role.Singler, Genre.Rap, RandomStates(Rareness.Elite)),
+            new BuffCard("Buff3", Rareness.Elite, Role.Drums,Genre.Rock, RandomStates(Rareness.Elite)),
+            new BonusCard("Bonus3", Rareness.Elite, Role.Guitar,Genre.Pop, RandomStates(Rareness.Elite)),
+            new DefenceCard ("Defence3", Rareness.Elite, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Elite)),
+            new GrowthCard ("Growth3", Rareness.Elite, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Elite))
          };
         }
         private Card[] Epic()
         {
             return new Card[]
             {
-            new Card("Atack4", CardType.Atack, Rareness.Epic, Role.Singler,Genre.Rap, RandomStates(Rareness.Epic)),
-            new Card("Buff4", CardType.Buff, Rareness.Epic, Role.Drums,Genre.Rock, RandomStates(Rareness.Epic)),
-            new Card("Bonus4",CardType.Bonus, Rareness.Epic, Role.Guitar,Genre.Pop, RandomStates(Rareness.Epic)),
-            new Card("Defence4", CardType.Defence, Rareness.Epic, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Epic)),
-            new Card("Growth4", CardType.Growth, Rareness.Epic, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Epic))
+            new AtackCard ("Atack4", Rareness.Epic, Role.Singler, Genre.Rap, RandomStates(Rareness.Epic)),
+            new BuffCard("Buff4", Rareness.Epic, Role.Drums,Genre.Rock, RandomStates(Rareness.Epic)),
+            new BonusCard("Bonus4", Rareness.Epic, Role.Guitar,Genre.Pop, RandomStates(Rareness.Epic)),
+            new DefenceCard("Defence4", Rareness.Epic, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Epic)),
+            new GrowthCard ("Growth4", Rareness.Epic, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Epic))
          };
         }
         private Card[] Legendary()
         {
             return new Card[]
             {
-            new Card("Atack5", CardType.Atack, Rareness.Legendary, Role.Singler,Genre.Rap, RandomStates(Rareness.Legendary)),
-            new Card("Buff5", CardType.Buff, Rareness.Legendary, Role.Drums,Genre.Rock, RandomStates(Rareness.Legendary)),
-            new Card("Bonus5", CardType.Bonus, Rareness.Legendary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Legendary)),
-            new Card("Defence5", CardType.Defence, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary)),
-            new Card("Growth5", CardType.Growth, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary))
+            new AtackCard ("Atack5", Rareness.Legendary, Role.Singler, Genre.Rap, RandomStates(Rareness.Legendary)),
+            new BuffCard("Buff5", Rareness.Legendary, Role.Drums,Genre.Rock, RandomStates(Rareness.Legendary)),
+            new BonusCard("Bonus5", Rareness.Legendary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Legendary)),
+            new DefenceCard("Defence5", Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary)),
+            new GrowthCard ("Growth5", Rareness.Legendary, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Legendary))
             };
         }
         public CardsGallery(Rareness rareness) : base()

@@ -40,20 +40,4 @@ namespace ZooBitSketch.Enums
         Teenager,
         Adult
     }
-    enum ClothesType
-    {
-        Instrument,
-        Hat,
-        Coat,
-        Boots,
-        Stone // upgrade material
-    }
-    internal enum CardType
-    {
-        Growth,
-        Defence,
-        Atack,
-        Buff,
-        Bonus
-    }
 }

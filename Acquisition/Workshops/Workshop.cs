@@ -29,12 +29,9 @@ namespace ZooBitSketch.Acquisition.Workshops
                     break;
                 if (int.TryParse(answer, out int selection) && selection > 0 && selection <= allSources.Count)
                 {
-                    if (ChooseActive(selection - 1))
-                    {
-                        source[selection - 1] = (selection - 1, true);
-                        Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
-                        TryChooseSources();
-                    }
+                    source[selection - 1] = (selection - 1, true);
+                    Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
+                    TryChooseSources();
                 }
                 else
                 {
@@ -42,11 +39,6 @@ namespace ZooBitSketch.Acquisition.Workshops
                     Console.ReadKey();
                 }
             }
-        }
-        protected virtual bool ChooseActive(int baseActiveIndex)
-        {
-            EnhancingActiveIndex = baseActiveIndex;
-            return true;
         }
         protected abstract void TryChooseSources();
         protected virtual void UpgradeActive()

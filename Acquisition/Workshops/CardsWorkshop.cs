@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ZooBitSketch.Enums;
-using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Cards;
 using ZooBitSketch.Property.Decks;
 
 namespace ZooBitSketch.Acquisition.Workshops

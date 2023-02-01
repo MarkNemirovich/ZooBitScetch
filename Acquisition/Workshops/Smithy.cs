@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using ZooBitSketch.Enums;
-using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Clothes;
 
 namespace ZooBitSketch.Acquisition.Workshops
 {
@@ -12,9 +12,9 @@ namespace ZooBitSketch.Acquisition.Workshops
         public Action<int> EnhenceSurplus;
         sealed protected override bool TryAddAsSource(int materialIndex)
         {
-            Clothes material = allSources[EnhancingActiveIndex] as Clothes;
-            Clothes target = allSources[materialIndex] as Clothes;
-            return material.PartType == target.PartType;
+            Clothes material = allSources[EnhancingActiveIndex];
+            Clothes target = allSources[materialIndex];
+            return material.GetType().Equals(target.GetType());
         }
         sealed protected override void TryChooseSources()
         {
@@ -61,16 +61,6 @@ namespace ZooBitSketch.Acquisition.Workshops
                     }
                 }
             } while (answer != "exit");
-        }
-        protected override bool ChooseActive(int baseActiveIndex)
-        {
-            if ((allSources[baseActiveIndex] as Clothes).PartType == ClothesType.Stone)
-            {
-                Console.WriteLine("Stone cannot be enhances. Choose wearable clothes");
-                return false;
-            }
-            EnhancingActiveIndex = baseActiveIndex;
-            return true;
         }
         sealed protected override void PrintList()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using ZooBitSketch.Enums;
 using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Clothes;
 
 namespace ZooBitSketch.Property.Galleries
 {
@@ -10,51 +11,50 @@ namespace ZooBitSketch.Property.Galleries
         {
             return new Clothes[]
             {
-            new Clothes("Stone", ClothesType.Stone, Rareness.Ordinary, Role.Universal, Genre.Universal, new States(Rareness.Ordinary)),
-            new Clothes("Boot1", ClothesType.Boots, Rareness.Ordinary, Role.Singler,Genre.Rap, RandomStates(Rareness.Ordinary)),
-            new Clothes("Instrument1", ClothesType.Instrument, Rareness.Ordinary, Role.Drums,Genre.Rock, RandomStates(Rareness.Ordinary)),
-            new Clothes("Hat1", ClothesType.Hat, Rareness.Ordinary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Ordinary)),
-            new Clothes("Coat1", ClothesType.Coat, Rareness.Ordinary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Ordinary))
+            new Boots("Boot1", Rareness.Ordinary, Role.Singler,Genre.Rap, RandomStates(Rareness.Ordinary)),
+            new Instrument("Instrument1", Rareness.Ordinary, Role.Drums,Genre.Rock, RandomStates(Rareness.Ordinary)),
+            new Hat ("Hat1", Rareness.Ordinary, Role.Guitar, Genre.Pop, RandomStates(Rareness.Ordinary)),
+            new Coat("Coat1", Rareness.Ordinary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Ordinary))
             };
         }
         private Clothes[] Rare()
         {
             return new Clothes[]
             {
-            new Clothes("Boot2", ClothesType.Boots, Rareness.Rare, Role.Singler,Genre.Rap, RandomStates(Rareness.Rare)),
-            new Clothes("Instrument2", ClothesType.Instrument, Rareness.Rare, Role.Drums,Genre.Rock, RandomStates(Rareness.Rare)),
-            new Clothes("Hat2", ClothesType.Hat, Rareness.Rare, Role.Guitar,Genre.Pop, RandomStates(Rareness.Rare)),
-            new Clothes("Coat2", ClothesType.Coat, Rareness.Rare, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Rare))
+            new Boots ("Boot2", Rareness.Rare, Role.Singler, Genre.Rap, RandomStates(Rareness.Rare)),
+            new Instrument ("Instrument2", Rareness.Rare, Role.Drums, Genre.Rock, RandomStates(Rareness.Rare)),
+            new Hat ("Hat2", Rareness.Rare, Role.Guitar, Genre.Pop, RandomStates(Rareness.Rare)),
+            new Coat ("Coat2", Rareness.Rare, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Rare))
             };
         }
         private Clothes[] Elite()
         {
             return new Clothes[]
             {
-            new Clothes("Boot3", ClothesType.Boots, Rareness.Elite, Role.Singler,Genre.Rap, RandomStates(Rareness.Elite)),
-            new Clothes("Instrument3", ClothesType.Instrument, Rareness.Elite, Role.Drums,Genre.Rock, RandomStates(Rareness.Elite)),
-            new Clothes("Hat3", ClothesType.Hat, Rareness.Elite, Role.Guitar,Genre.Pop, RandomStates(Rareness.Elite)),
-            new Clothes("Coat3", ClothesType.Coat, Rareness.Elite, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Elite))
+            new Boots ("Boot3", Rareness.Elite, Role.Singler, Genre.Rap, RandomStates(Rareness.Elite)),
+            new Instrument ("Instrument3", Rareness.Elite, Role.Drums, Genre.Rock, RandomStates(Rareness.Elite)),
+            new Hat ("Hat3", Rareness.Elite, Role.Guitar, Genre.Pop, RandomStates(Rareness.Elite)),
+            new Coat ("Coat3", Rareness.Elite, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Elite))
             };
         }
         private Clothes[] Epic()
         {
             return new Clothes[]
             {
-            new Clothes("Boot4", ClothesType.Boots, Rareness.Epic, Role.Singler,Genre.Rap, RandomStates(Rareness.Epic)),
-            new Clothes("Instrument4", ClothesType.Instrument, Rareness.Epic, Role.Drums,Genre.Rock, RandomStates(Rareness.Epic)),
-            new Clothes("Hat4",ClothesType.Hat, Rareness.Epic, Role.Guitar,Genre.Pop, RandomStates(Rareness.Epic)),
-            new Clothes("Coat4", ClothesType.Coat, Rareness.Epic, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Epic))
+            new Boots ("Boot4", Rareness.Epic, Role.Singler, Genre.Rap, RandomStates(Rareness.Epic)),
+            new Instrument ("Instrument4", Rareness.Epic, Role.Drums, Genre.Rock, RandomStates(Rareness.Epic)),
+            new Hat ("Hat4", Rareness.Epic, Role.Guitar, Genre.Pop, RandomStates(Rareness.Epic)),
+            new Coat ("Coat4", Rareness.Epic, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Epic))
         };
         }
         private Clothes[] Legendary()
         {
             return new Clothes[]
             {
-            new Clothes("Boot5", ClothesType.Boots, Rareness.Legendary, Role.Singler,Genre.Rap, RandomStates(Rareness.Legendary)),
-            new Clothes("Instrument5", ClothesType.Instrument, Rareness.Legendary, Role.Drums,Genre.Rock, RandomStates(Rareness.Legendary)),
-            new Clothes("Hat5", ClothesType.Hat, Rareness.Legendary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Legendary)),
-            new Clothes("Coat5", ClothesType.Coat, Rareness.Legendary, Role.Pianist,Genre.Reggae, RandomStates(Rareness.Legendary))
+            new Boots ("Boot5", Rareness.Legendary, Role.Singler, Genre.Rap, RandomStates(Rareness.Legendary)),
+            new Instrument ("Instrument5", Rareness.Legendary, Role.Drums, Genre.Rock, RandomStates(Rareness.Legendary)),
+            new Hat("Hat5", Rareness.Legendary, Role.Guitar,Genre.Pop, RandomStates(Rareness.Legendary)),
+            new Coat ("Coat5", Rareness.Legendary, Role.Pianist, Genre.Reggae, RandomStates(Rareness.Legendary))
             };
         }
         public ClothesGallery(Rareness rareness) : base()

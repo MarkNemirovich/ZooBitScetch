@@ -1,6 +1,8 @@
 ﻿using System;
 using ZooBitSketch.Enums;
 using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Cards;
+using ZooBitSketch.Property.Actives.Clothes;
 using ZooBitSketch.Property.Decks;
 
 namespace ZooBitSketch.Property.PlayerThings

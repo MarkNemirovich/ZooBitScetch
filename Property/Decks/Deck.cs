@@ -1,5 +1,5 @@
 ﻿using System;
-using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Cards;
 
 namespace ZooBitSketch.Property.Decks
 {

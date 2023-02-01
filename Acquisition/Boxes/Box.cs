@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ZooBitSketch.Enums;
 using ZooBitSketch.Property.Actives;
+using ZooBitSketch.Property.Actives.Clothes;
 using ZooBitSketch.Property.Galleries;
 using ZooBitSketch.Property.PlayerThings;
 

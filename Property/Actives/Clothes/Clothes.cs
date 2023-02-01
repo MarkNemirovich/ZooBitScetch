@@ -1,17 +1,15 @@
 ﻿using System;
 using ZooBitSketch.Enums;
 
-namespace ZooBitSketch.Property.Actives
+namespace ZooBitSketch.Property.Actives.Clothes
 {
     internal class Clothes : Active
     {
-        public readonly ClothesType PartType;
         public int EnhanceLevel { get; private set; }
         public int EnhanceCost { get; private set; }
-        public Clothes(string name, ClothesType type, Rareness rareness, Role role, Genre genre, States states)
+        public Clothes(string name, Rareness rareness, Role role, Genre genre, States states)
             : base(name, rareness, role, genre, states)
         {
-            PartType = type;
             EnhanceLevel = 0;
             EnhanceCost = 10 * (int)Rareness.Ordinary / (int)rareness;
         }
@@ -19,11 +17,11 @@ namespace ZooBitSketch.Property.Actives
         {
             byte typeSum = 0;
             byte nameSum = 0;
-            foreach (char letter in this.GetType().Name)
+            foreach (char letter in GetType().Name)
                 typeSum += (byte)letter;
             foreach (char letter in Name)
                 nameSum += (byte)letter;
-            return (typeSum << 24) | ((byte)EnhanceLevel << 20) | ((byte)Rareness << 16) | ((byte)Role << 12) | ((byte)Genre << 8) | (nameSum);
+            return typeSum << 24 | (byte)EnhanceLevel << 20 | (byte)Rareness << 16 | (byte)Role << 12 | (byte)Genre << 8 | nameSum;
         }
         sealed public override void Evolve()
         {
@@ -34,18 +32,11 @@ namespace ZooBitSketch.Property.Actives
         }
         sealed public override int CompareTo(Active another)
         {
-            Clothes clothes = another as Clothes;
-            int first = PartType.CompareTo(clothes.PartType);
-            if (first != 0) { return first; }
-            first = Rareness.CompareTo(clothes.Rareness);
-            if (first != 0) { return first; }
-            first = -EnhanceLevel.CompareTo(clothes.EnhanceLevel);
-            if (first != 0) { return first; }
-            else return -States.Power.CompareTo(clothes.States.Power);
+            return GetHashCode().CompareTo(another.GetHashCode());
         }
         public int CalculateEnhanceCost()
         {
-            return (int)Rareness.Ordinary / (int)Rareness * (EnhanceLevel+1);
+            return (int)Rareness.Ordinary / (int)Rareness * (EnhanceLevel + 1);
         }
     }
 }
