@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZooBitSketch.Enums;
+using ZooBitSketch.Rewards;
 
 namespace ZooBitSketch
 {
@@ -226,6 +227,19 @@ namespace ZooBitSketch
         protected string DefaultDescription()
         {
             return "Победите в бою";
+        }
+        protected virtual Dictionary<Currency, int> SetCurrencies(int index)
+        {
+            Dictionary<Currency, int> reward = new Dictionary<Currency, int>();
+            reward.Add(Currency.Money, 10 * (index + 1));
+            if ((index + 1) % 5 == 0)
+                reward.Add(Currency.Diamonds, 10);
+            return reward;
+        }
+        protected virtual int SetExpirience(int index) => 10 + 5 * index;
+        protected StageReward SetReward(int index)
+        {
+            return new StageReward(SetCurrencies(index), SetExpirience(index));
         }
     }
 }

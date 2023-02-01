@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using ZooBitSketch.Enums;
+using ZooBitSketch.Rewards;
 
 namespace ZooBitSketch
 {
@@ -21,10 +22,11 @@ namespace ZooBitSketch
         public readonly Genre adverseGenre;
         public readonly Predicate<HashSet<Role>> Restriction;
         public readonly Predicate<(Conditions, int)> Bonus;
+        public readonly StageReward Reward;
         public int Stars { get; private set; }
 
         public Stage(string name, string description, int teamSize, int deckSize, int euphoriaAmount, Genre benefit, Genre adverse,
-            Predicate<HashSet<Role>> restriction, Predicate<(Conditions, int)> bonus)
+            Predicate<HashSet<Role>> restriction, Predicate<(Conditions, int)> bonus, StageReward rewards)
         {
             Name = name;
             TermsDescription = description;
@@ -36,6 +38,7 @@ namespace ZooBitSketch
             adverseGenre = adverse;
             Restriction = restriction;
             Bonus = bonus;
+            Reward = rewards;
         }
         public void ChangeEnableMode(Terms term)
         {
