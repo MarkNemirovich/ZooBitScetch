@@ -8,35 +8,60 @@ namespace ZooBitSketch
 {
     internal class Stage
     {
-        private const int CARDS_LIMIT = 15;
-        public readonly string Name;
-        public int TeamSize { get; private set; }
-        public int DeckSize { get; private set; }
-        public int Stars { get; private set; }
-        public int EuphoriaAmount { get; private set; }
-        public Genre benefitGenre;
-        public Genre adverseGenre;
-        private bool isAvaliable;
-        public Predicate<HashSet<Role>> RestrictedTerm { get; private set; }
-        public Predicate<(Conditions, int)> BonusTerm { get; private set; }
+        public event Action StageStarted;
+        public event Action StageComplited;
+        public event Action StageCleared;
 
-        public Stage(string name, int teamSize, int deckSize, int euphoriaAmount, Genre benefit, Genre adverse, Predicate<HashSet<Role>> restricted, Predicate<(Conditions, int)> bonus)
+        public readonly string Name;
+        public readonly string TermsDescription;
+        public readonly int TeamSize;
+        public readonly int DeckSize;
+        public readonly int EuphoriaGoal;
+        public readonly Genre benefitGenre;
+        public readonly Genre adverseGenre;
+        public readonly Predicate<HashSet<Role>> Restriction;
+        public readonly Predicate<(Conditions, int)> Bonus;
+        public int Stars { get; private set; }
+
+        public Stage(string name, string description, int teamSize, int deckSize, int euphoriaAmount, Genre benefit, Genre adverse,
+            Predicate<HashSet<Role>> restriction, Predicate<(Conditions, int)> bonus)
         {
             Name = name;
+            TermsDescription = description;
             TeamSize = teamSize;
             DeckSize = deckSize;
-            Stars = 0;
-            EuphoriaAmount = euphoriaAmount;
+            EuphoriaGoal = euphoriaAmount;
+            Stars = -1;
             benefitGenre = benefit;
             adverseGenre = adverse;
-            RestrictedTerm = restricted;
-            BonusTerm = bonus;
+            Restriction = restriction;
+            Bonus = bonus;
         }
         public void ChangeEnableMode(Terms term)
         {
+            if (term == Terms.Open)
+            {
+                Stars = 0;
+                return;
+            }
             if ((int)term > Stars)
+            {
+                if (Stars == 0)
+                    StageComplited?.Invoke();
                 Stars = (int)term;
-            isAvaliable = (Stars == (int)Terms.Failed || Stars == (int)Terms.Bonus + (int)Terms.Bonus);
+            }
+            StageCleared?.Invoke();
+        }
+        public string Info()
+        {
+            string text = $"{Name,-30}";
+            if (Stars < 0)
+                text += "is not available yet";
+            if (Stars < 0)
+                text += $"is not completed yet";
+            else
+                text += $"is completed on {Stars} stars";
+            return text;
         }
     }
 }

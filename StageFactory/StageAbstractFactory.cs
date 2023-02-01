@@ -14,7 +14,7 @@ namespace ZooBitSketch
         public Stage[] CreateStages()
         {
             var stages = new Stage[stagesAmount];
-            for (int i = 0; i < 2 * stagesAmount; i++)
+            for (int i = 0; i < stagesAmount; i++)
                 stages[i] = CreateStage(i);
             return stages;
         }
@@ -222,6 +222,10 @@ namespace ZooBitSketch
         protected bool NoCondition((Conditions type, int value) condition)
         {
             return true;
+        }
+        protected string DefaultDescription()
+        {
+            return "Победите в бою";
         }
     }
 }

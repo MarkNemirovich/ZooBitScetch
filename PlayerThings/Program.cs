@@ -25,6 +25,7 @@ namespace ZooBitSketch
             Smithy Smithy = new Smithy(player.Wardrobe.Pack);
             Smithy.EnhenceSurplus += player.Bag.AddSurplusEnhanceMaterial;
             CharacterShop Cshop = new CharacterShop();
+            Story story = Story.GetInstance();
 
             string input;
             do
@@ -32,7 +33,7 @@ namespace ZooBitSketch
                 Console.Clear();
                 Console.WriteLine("If you want to get info, choose one of them. For exit write \"exit.\"\n" +
                     "Player\nWallet\nBag\nDeck\nTeam\nWardrobe\n" +
-                    "Cbanner\nEbanner\nFbanner\nGbanner\nWorkshop\nSmithy\nCshop\n");
+                    "Cbanner\nEbanner\nFbanner\nGbanner\nWorkshop\nSmithy\nCshop\nStory\n");
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -49,6 +50,7 @@ namespace ZooBitSketch
                     case "Workshop": Workshop.Enhance(); break;
                     case "Smithy": Smithy.Enhance(); Smithy.EnhenceSurplus -= player.Bag.AddSurplusEnhanceMaterial; break;
                     case "Cshop": Cshop.Entry(player); break;
+                    case "Story": story.SelectChapter(); break;
                     default: Console.WriteLine("No such command"); break;
                 }
             } while (input != "exit");

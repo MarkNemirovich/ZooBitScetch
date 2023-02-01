@@ -14,7 +14,6 @@ namespace ZooBitSketch
             {
                 Add(part);
             }
-            Console.ReadLine();
         }
         sealed public override void Add(Character newItem)
         {
