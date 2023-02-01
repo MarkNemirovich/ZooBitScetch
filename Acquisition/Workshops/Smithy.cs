@@ -9,7 +9,7 @@ namespace ZooBitSketch.Acquisition.Workshops
     internal class Smithy : Workshop<Clothes>
     {
         public Smithy(List<Clothes> pack) : base(pack) { }
-        public Action<int> EnhenceSurplus;
+        public Action<(Resources,int)> EnhenceSurplus;
         sealed protected override bool TryAddAsSource(int materialIndex)
         {
             Clothes material = allSources[EnhancingActiveIndex];
@@ -54,7 +54,7 @@ namespace ZooBitSketch.Acquisition.Workshops
                         }
                         if (materialExp >= cost)
                         {
-                            EnhenceSurplus?.Invoke(materialExp - cost);
+                            EnhenceSurplus?.Invoke((Resources.Stone,materialExp - cost));
                             UpgradeActive();
                         }
                         Console.WriteLine($"You filled {materialExp}/{cost} enhanceExp");

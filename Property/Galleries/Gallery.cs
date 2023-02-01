@@ -40,11 +40,9 @@ namespace ZooBitSketch.Property.Galleries
             int number = rand.Next(0, CurrentPack.Length);
             return CurrentPack[number];
         }
-        public T[] StartedPack(int size)
+        public T[] StartedPack()
         {
-            T[] pack = null;
-            if (size == 0)
-                allActives.TryGetValue(Rareness.Ordinary, out pack);
+            allActives.TryGetValue(Rareness.Ordinary, out T[] pack);
             return pack;
         }
     }

@@ -28,10 +28,10 @@ namespace ZooBitSketch.Property.PlayerThings
             Console.WriteLine($"{data}Press any key for continue...");
             Console.ReadKey();
         }
-        public void AddSurplusEnhanceMaterial(int material)
+        public void AddSurplusEnhanceMaterial((Resources material, int amount) resource)
         {
-            if (resources.TryGetValue(Resources.Stone, out int Stone))
-                resources[Resources.Stone] += material;
+            if (resources.TryGetValue(resource.material, out int amount))
+                resources[resource.material] += resource.amount;
         }
     }
 }

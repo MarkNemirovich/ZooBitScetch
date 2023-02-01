@@ -12,7 +12,7 @@ namespace ZooBitSketch.Property.Decks
         public Team(int size) : base(size)
         {
             CharactersGallery gallery = new CharactersGallery(Rareness.Ordinary);
-            var initialParty = gallery.StartedPack(Pack.Count);
+            var initialParty = gallery.StartedPack();
             foreach (var part in initialParty)
             {
                 Add(part);

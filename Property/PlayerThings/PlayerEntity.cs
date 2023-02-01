@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ZooBitSketch.Enums;
 using ZooBitSketch.Property.Actives;
 using ZooBitSketch.Property.Actives.Cards;
@@ -44,6 +45,10 @@ namespace ZooBitSketch.Property.PlayerThings
             lvl++;
             if (lvl % 5 == 0)
                 _maxSize++;
+        }
+        private void AddResource((Resources material, int amount) resource)
+        {
+            Bag.AddSurplusEnhanceMaterial(resource);
         }
         public void Info()
         {

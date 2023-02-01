@@ -24,7 +24,7 @@ namespace ZooBitSketch.Acquisition.Workshops
             Card target = allSources[materialIndex] as Card;
             if (material != null)
             {
-                if (material.GetHashCode() == target.GetHashCode() && target.Quality < Quality.Platinum)
+                if (material.GUID.Equals(target.GUID) && target.Quality < Quality.Platinum)
                 {
                     EnhancingMaterialsIndexes.Add(materialIndex);
                     UpgradeActive();

@@ -30,6 +30,7 @@ namespace ZooBitSketch.Acquisition.Workshops
                 if (int.TryParse(answer, out int selection) && selection > 0 && selection <= allSources.Count)
                 {
                     source[selection - 1] = (selection - 1, true);
+                    EnhancingActiveIndex = selection - 1;
                     Console.WriteLine($"{MaterialChoose()}\nPress \"exit\" for finish");
                     TryChooseSources();
                 }
@@ -44,11 +45,11 @@ namespace ZooBitSketch.Acquisition.Workshops
         protected virtual void UpgradeActive()
         {
             allSources[EnhancingActiveIndex].Evolve();
-            EnhancingMaterialsIndexes.Sort();
             for (int i = EnhancingMaterialsIndexes.Count - 1; i >= 0; i--) // delete from the end, because shift would change indexes
             {
                 allSources[EnhancingMaterialsIndexes[i]].Sacrifice();
             }
+            allSources.Sort();
         }
         protected virtual bool TryAddAsSource(int materialIndex)
         {
