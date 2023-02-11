@@ -8,7 +8,7 @@ namespace ZooBitSketch.Property.Decks
     {
         public string Name { get; private set; }
         public List<T> Pack { get; private set; }
-        protected AbstractDeck(int size)
+        protected AbstractDeck(int size = 0)
         {
             Name = typeof(T).Name;
             Pack = new List<T>(size);
